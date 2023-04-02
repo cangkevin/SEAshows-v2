@@ -18,7 +18,7 @@ const config = {
   parserOptions: {
     project: path.join(__dirname, "tsconfig.json"),
   },
-  plugins: ["@typescript-eslint"],
+  plugins: ["@typescript-eslint", "no-loops"],
   extends: ["next/core-web-vitals", "plugin:@typescript-eslint/recommended"],
   rules: {
     "@typescript-eslint/consistent-type-imports": [
@@ -29,6 +29,8 @@ const config = {
       },
     ],
     "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
+    "no-console": ["warn"],
+    "no-loops/no-loops": ["error"],
   },
 };
 
