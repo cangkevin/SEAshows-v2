@@ -3,22 +3,22 @@
   "[javascript]": {
     "editor.formatOnSave": false,
     "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.codeActionsOnSave": ["source.formatDocument", "source.fixAll.eslint"]
+    "editor.codeActionsOnSave": ["source.fixAll.eslint", "source.formatDocument"]
   },
   "[javascriptreact]": {
     "editor.formatOnSave": false,
     "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.codeActionsOnSave": ["source.formatDocument", "source.fixAll.eslint"]
+    "editor.codeActionsOnSave": ["source.fixAll.eslint", "source.formatDocument"]
   },
   "[typescript]": {
     "editor.formatOnSave": false,
     "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.codeActionsOnSave": ["source.formatDocument", "source.fixAll.eslint"]
+    "editor.codeActionsOnSave": ["source.fixAll.eslint", "source.formatDocument"]
   },
   "[typescriptreact]": {
     "editor.formatOnSave": false,
     "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.codeActionsOnSave": ["source.formatDocument", "source.fixAll.eslint"]
+    "editor.codeActionsOnSave": ["source.fixAll.eslint", "source.formatDocument"]
   },
   "[json]": {
     "editor.quickSuggestions": {
