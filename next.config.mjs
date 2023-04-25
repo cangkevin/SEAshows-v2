@@ -1,8 +1,10 @@
+import { env } from './src/env.mjs'
+
 /**
  * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation.
  * This is especially useful for Docker builds.
  */
-!process.env.SKIP_ENV_VALIDATION && (await import("./src/env.mjs"));
+!process.env.SKIP_ENV_VALIDATION && (await import('./src/env.mjs'))
 
 /** @type {import("next").NextConfig} */
 const config = {
@@ -15,8 +17,18 @@ const config = {
    * @see https://github.com/vercel/next.js/issues/41980
    */
   i18n: {
-    locales: ["en"],
-    defaultLocale: "en",
+    locales: ['en'],
+    defaultLocale: 'en',
   },
-};
-export default config;
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: env.IMAGE_DOMAIN,
+        port: '',
+        pathname: '/dramas/**',
+      },
+    ],
+  },
+}
+export default config
