@@ -1,8 +1,8 @@
 import { type NextPage } from 'next'
-import Head from 'next/head'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
+import Layout from '~/components/Layout'
 import { api } from '~/utils/api'
 
 const Episodes: NextPage = () => {
@@ -13,15 +13,12 @@ const Episodes: NextPage = () => {
   const page = parseInt(router.query.page as string) || 1
 
   const episodes = api.episodes.getEpisodes.useQuery({ showId, page })
+  const pageTitle = episodes.data
+    ? episodes.data.title + ` - Page ${page}`
+    : null
 
   return (
-    <>
-      <Head>
-        <title>SEAshows</title>
-        <meta name='description' content='SEAshows portal' />
-        <link rel='icon' href='/favicon.ico' />
-      </Head>
-
+    <Layout title={pageTitle}>
       <main className='container mx-auto'>
         <header className='text-4xl'>
           {episodes.data ? episodes.data.title + ` - Page ${page}` : null}
@@ -96,7 +93,7 @@ const Episodes: NextPage = () => {
           )
         ) : null}
       </main>
-    </>
+    </Layout>
   )
 }
 

@@ -1,9 +1,9 @@
 import { type NextPage } from 'next'
-import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
+import Layout from '~/components/Layout'
 import { api } from '~/utils/api'
 
 const Shows: NextPage = () => {
@@ -13,19 +13,12 @@ const Shows: NextPage = () => {
   const page = parseInt(router.query.page as string) || 1
 
   const shows = api.shows.getShows.useQuery({ category, page })
+  const pageTitle = `${category} - Page ${page}`
 
   return (
-    <>
-      <Head>
-        <title>SEAshows</title>
-        <meta name='description' content='SEAshows portal' />
-        <link rel='icon' href='/favicon.ico' />
-      </Head>
-
+    <Layout title={pageTitle}>
       <main className='container mx-auto'>
-        <h1 className='text-4xl'>
-          {category} - Page {page}
-        </h1>
+        <h1 className='text-4xl'>{pageTitle}</h1>
 
         {shows.isLoading ? (
           <div className='container mx-auto'>
@@ -102,7 +95,7 @@ const Shows: NextPage = () => {
           )
         ) : null}
       </main>
-    </>
+    </Layout>
   )
 }
 
