@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 import Layout from '~/components/Layout'
+import Loader from '~/components/Loader'
 import { api } from '~/utils/api'
 
 const Shows: NextPage = () => {
@@ -20,11 +21,7 @@ const Shows: NextPage = () => {
       <main className='container mx-auto'>
         <h1 className='text-4xl'>{pageTitle}</h1>
 
-        {shows.isLoading ? (
-          <div className='container mx-auto'>
-            <div className='absolute left-2/4 top-2/4'>Fetching shows</div>
-          </div>
-        ) : null}
+        {shows.isLoading ? <Loader text='Fetching shows' /> : null}
 
         {shows.isFetched ? (
           shows.data?.shows ? (

@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 import Layout from '~/components/Layout'
+import Loader from '~/components/Loader'
 import { api } from '~/utils/api'
 
 const Episodes: NextPage = () => {
@@ -24,11 +25,7 @@ const Episodes: NextPage = () => {
           {episodes.data ? episodes.data.title + ` - Page ${page}` : null}
         </header>
 
-        {episodes.isLoading ? (
-          <div className='container mx-auto'>
-            <div className='absolute left-2/4 top-2/4'>Fetching episodes</div>
-          </div>
-        ) : null}
+        {episodes.isLoading ? <Loader text='Fetching episodes' /> : null}
 
         {episodes.isFetched ? (
           episodes.data?.episodes ? (
