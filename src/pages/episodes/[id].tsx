@@ -21,8 +21,12 @@ const Episodes: NextPage = () => {
   return (
     <Layout title={pageTitle}>
       <main className='container mx-auto'>
-        <header className='text-4xl'>
-          {episodes.data ? episodes.data.title + ` - Page ${page}` : null}
+        <header>
+          {episodes.data ? (
+            <h1 className='text-4xl'>
+              {episodes.data.title} - Page {page}
+            </h1>
+          ) : null}
         </header>
 
         {episodes.isLoading ? <Loader text='Fetching episodes' /> : null}

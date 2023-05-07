@@ -19,7 +19,9 @@ const Shows: NextPage = () => {
   return (
     <Layout title={pageTitle}>
       <main className='container mx-auto'>
-        <h1 className='text-4xl'>{pageTitle}</h1>
+        <header>
+          <h1 className='text-4xl'>{pageTitle}</h1>
+        </header>
 
         {shows.isLoading ? <Loader text='Fetching shows' /> : null}
 
