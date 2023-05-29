@@ -88,9 +88,7 @@ const Episodes: NextPage = () => {
               ) : null}
             </div>
           ) : (
-            <div className='container mx-auto' hidden={episodes.isLoading}>
-              <div className='absolute left-2/4 top-2/4'>No episodes found</div>
-            </div>
+            <Loader text='No episodes found' />
           )
         ) : null}
       </main>

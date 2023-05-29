@@ -23,9 +23,9 @@ const Shows: NextPage = () => {
           <h1 className='text-4xl'>{pageTitle}</h1>
         </header>
 
-        {shows.isLoading ? <Loader text='Fetching shows' /> : null}
-
-        {shows.isFetched ? (
+        {shows.isLoading ? (
+          <Loader text='Fetching shows' />
+        ) : shows.isFetched ? (
           shows.data?.shows ? (
             <>
               <div className='grid grid-cols-4 gap-9 pb-4 pt-4'>
@@ -88,9 +88,7 @@ const Shows: NextPage = () => {
               </footer>
             </>
           ) : (
-            <div className='container mx-auto' hidden={shows.isLoading}>
-              <div className='absolute left-2/4 top-2/4'>No shows found</div>
-            </div>
+            <Loader text='No shows found' />
           )
         ) : null}
       </main>
