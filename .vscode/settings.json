@@ -34,5 +34,10 @@
       "strings": "on",
       "other": "on"
     }
-  }
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.markdownlint": true
+  },
+  "markdown.extension.toc.updateOnSave": true,
+  "markdown.extension.preview.autoShowPreviewToSide": true
 }

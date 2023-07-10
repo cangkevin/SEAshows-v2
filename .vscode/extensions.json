@@ -9,6 +9,7 @@
     "oderwat.indent-rainbow",
     "rohit-gohri.format-code-action",
     "dbaeumer.vscode-eslint",
-    "editorconfig.editor"
+    "editorconfig.editor",
+    "exodiusstudios.comment-anchors"
   ]
 }
