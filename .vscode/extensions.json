@@ -1,0 +1,14 @@
+{
+  "recommendations": [
+    "bradlc.vscode-tailwindcss",
+    "yoavbls.pretty-ts-errors",
+    "esbenp.prettier-vscode",
+    "davidanson.vscode-markdownlint",
+    "bierner.markdown-mermaid",
+    "yzhang.markdown-all-in-one",
+    "oderwat.indent-rainbow",
+    "rohit-gohri.format-code-action",
+    "dbaeumer.vscode-eslint",
+    "editorconfig.editor"
+  ]
+}
