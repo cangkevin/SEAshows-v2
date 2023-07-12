@@ -20,73 +20,92 @@ const Episodes: NextPage = () => {
 
   return (
     <Layout title={pageTitle}>
-      <main className='container mx-auto'>
+      <main>
         <header>
-          {episodes.data ? (
-            <h1 className='text-4xl'>
-              {episodes.data.title} - Page {page}
-            </h1>
-          ) : null}
+          <div className='container mx-auto'>
+            {episodes.data ? (
+              <div>
+                <h1 className='text-4xl'>
+                  {episodes.data.title} - Page {page}
+                </h1>
+              </div>
+            ) : null}
+          </div>
         </header>
 
         {episodes.isLoading ? <Loader text='Fetching episodes' /> : null}
 
         {episodes.isFetched ? (
           episodes.data?.episodes ? (
-            <div style={{ minHeight: episodes.data.nextPage ? '100vh' : '' }}>
-              <div className='grid grid-cols-1 pb-4 text-center'>
-                {episodes.data.episodes.map((episode, index) =>
-                  episode.id ? (
-                    <div key={`${episode.id}_${index}`}>
-                      <Link
-                        className='text-xl hover:text-blue-700'
-                        href={`/videos/${episode.id}`}
-                      >
-                        {episode.title}
-                      </Link>
+            <>
+              <div
+                style={{ minHeight: episodes.data.nextPage ? '100vh' : '95vh' }}
+              >
+                <div className='container mx-auto'>
+                  <div className='grid grid-cols-1 gap-1 text-center'>
+                    {episodes.data.episodes.map((episode, index) =>
+                      episode.id ? (
+                        <div key={`${episode.id}_${index}`}>
+                          <Link
+                            className='text-xl hover:text-blue-700'
+                            href={`/videos/${episode.id}`}
+                          >
+                            {episode.title}
+                          </Link>
+                        </div>
+                      ) : null,
+                    )}
+                  </div>
+
+                  {episodes.data.nextPage ? (
+                    <div>
+                      <nav>
+                        <div className='mb-4 mt-4 flex justify-center'>
+                          {page > 1 && (
+                            <div>
+                              <Link
+                                className='ml-0 rounded-l-lg border bg-white px-3 py-2 leading-tight hover:text-blue-700'
+                                href={`/episodes/${showId}?page=${page - 1}`}
+                              >
+                                Page {page - 1}
+                              </Link>
+                            </div>
+                          )}
+                          <div>
+                            <Link
+                              className='ml-0 border bg-white px-3 py-2 leading-tight hover:text-blue-700'
+                              href={`/episodes/${showId}?page=${page}`}
+                            >
+                              Page {page}
+                            </Link>
+                          </div>
+                          {episodes.isFetched &&
+                            (episodes.data?.nextPage ? (
+                              <div>
+                                <Link
+                                  className='ml-0 rounded-r-lg border bg-white px-3 py-2 leading-tight hover:text-blue-700'
+                                  href={`/episodes/${showId}?page=${page + 1}`}
+                                >
+                                  Page {page + 1}
+                                </Link>
+                              </div>
+                            ) : null)}
+                        </div>
+                      </nav>
                     </div>
-                  ) : null,
-                )}
+                  ) : null}
+                </div>
               </div>
 
-              {episodes.data.nextPage ? (
-                <footer className='sticky top-[100vh]'>
-                  <nav className='flex justify-center'>
-                    <ul className='inline-flex -space-x-px'>
-                      {page > 1 && (
-                        <li>
-                          <Link
-                            className='ml-0 rounded-l-lg border bg-white px-3 py-2 leading-tight hover:text-blue-700'
-                            href={`/episodes/${showId}?page=${page - 1}`}
-                          >
-                            Page {page - 1}
-                          </Link>
-                        </li>
-                      )}
-                      <li>
-                        <Link
-                          className='ml-0 border bg-white px-3 py-2 leading-tight hover:text-blue-700'
-                          href={`/episodes/${showId}?page=${page}`}
-                        >
-                          Page {page}
-                        </Link>
-                      </li>
-                      {episodes.isFetched &&
-                        (episodes.data?.nextPage ? (
-                          <li>
-                            <Link
-                              className='ml-0 rounded-r-lg border bg-white px-3 py-2 leading-tight hover:text-blue-700'
-                              href={`/episodes/${showId}?page=${page + 1}`}
-                            >
-                              Page {page + 1}
-                            </Link>
-                          </li>
-                        ) : null)}
-                    </ul>
-                  </nav>
-                </footer>
-              ) : null}
-            </div>
+              <footer>
+                <div className='container mx-auto'>
+                  <div>
+                    This site does not store any files on its server. All
+                    contents are provided by non-affiliated third parties.
+                  </div>
+                </div>
+              </footer>
+            </>
           ) : (
             <Loader text='No episodes found' />
           )

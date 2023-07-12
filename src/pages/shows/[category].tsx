@@ -18,9 +18,13 @@ const Shows: NextPage = () => {
 
   return (
     <Layout title={pageTitle}>
-      <main className='container mx-auto'>
+      <main>
         <header>
-          <h1 className='text-4xl'>{pageTitle}</h1>
+          <div className='container mx-auto'>
+            <div>
+              <h1 className='text-4xl'>{pageTitle}</h1>
+            </div>
+          </div>
         </header>
 
         {shows.isLoading ? (
@@ -28,63 +32,74 @@ const Shows: NextPage = () => {
         ) : shows.isFetched ? (
           shows.data?.shows ? (
             <>
-              <div className='grid grid-cols-4 gap-9 pb-4 pt-4'>
-                {shows.data.shows.map((show) => (
-                  <div key={show.id}>
-                    <div className='justify-center'>
-                      <Link
-                        className='relative flex h-24 border-4'
-                        href={`/episodes/${show.id}`}
-                      >
-                        <Image src={show.imageUrl} alt='' fill />
-                      </Link>
-                    </div>
-                    <div className='flex justify-center text-xl'>
-                      <Link
-                        href={`/episodes/${show.id}`}
-                        className='hover:text-blue-700'
-                      >
-                        {show.title}
-                      </Link>
-                    </div>
+              <div id='body' className='mb-5'>
+                <div className='container mx-auto'>
+                  <div className='grid grid-cols-4 gap-9'>
+                    {shows.data.shows.map((show) => (
+                      <div key={show.id}>
+                        <Link
+                          className='relative flex h-24 border-4'
+                          href={`/episodes/${show.id}`}
+                        >
+                          <Image src={show.imageUrl} alt='' fill />
+                        </Link>
+                        <div className='flex justify-center text-xl'>
+                          <Link
+                            href={`/episodes/${show.id}`}
+                            className='hover:text-blue-700'
+                          >
+                            {show.title}
+                          </Link>
+                        </div>
+                      </div>
+                    ))}
                   </div>
-                ))}
+
+                  <div>
+                    <nav>
+                      <div className='mb-4 mt-4 flex justify-center'>
+                        {page > 1 && (
+                          <div>
+                            <Link
+                              className='ml-0 rounded-l-lg border bg-white px-3 py-2 leading-tight hover:text-blue-700'
+                              href={`/shows/${category}?page=${page - 1}`}
+                            >
+                              Page {page - 1}
+                            </Link>
+                          </div>
+                        )}
+                        <div>
+                          <Link
+                            className='ml-0 border bg-white px-3 py-2 leading-tight hover:text-blue-700'
+                            href={`/shows/${category}?page=${page}`}
+                          >
+                            Page {page}
+                          </Link>
+                        </div>
+                        {shows.isFetched &&
+                          (shows.data?.nextPage ? (
+                            <div>
+                              <Link
+                                className='ml-0 rounded-r-lg border bg-white px-3 py-2 leading-tight hover:text-blue-700'
+                                href={`/shows/${category}?page=${page + 1}`}
+                              >
+                                Page {page + 1}
+                              </Link>
+                            </div>
+                          ) : null)}
+                      </div>
+                    </nav>
+                  </div>
+                </div>
               </div>
 
               <footer>
-                <nav className='flex justify-center'>
-                  <ul className='inline-flex -space-x-px'>
-                    {page > 1 && (
-                      <li>
-                        <Link
-                          className='ml-0 rounded-l-lg border bg-white px-3 py-2 leading-tight hover:text-blue-700'
-                          href={`/shows/${category}?page=${page - 1}`}
-                        >
-                          Page {page - 1}
-                        </Link>
-                      </li>
-                    )}
-                    <li>
-                      <Link
-                        className='ml-0 border bg-white px-3 py-2 leading-tight hover:text-blue-700'
-                        href={`/shows/${category}?page=${page}`}
-                      >
-                        Page {page}
-                      </Link>
-                    </li>
-                    {shows.isFetched &&
-                      (shows.data?.nextPage ? (
-                        <li>
-                          <Link
-                            className='ml-0 rounded-r-lg border bg-white px-3 py-2 leading-tight hover:text-blue-700'
-                            href={`/shows/${category}?page=${page + 1}`}
-                          >
-                            Page {page + 1}
-                          </Link>
-                        </li>
-                      ) : null)}
-                  </ul>
-                </nav>
+                <div className='container mx-auto'>
+                  <div>
+                    This site does not store any files on its server. All
+                    contents are provided by non-affiliated third parties.
+                  </div>
+                </div>
               </footer>
             </>
           ) : (
