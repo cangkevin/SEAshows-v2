@@ -18,95 +18,84 @@ const Shows: NextPage = () => {
 
   return (
     <Layout title={pageTitle}>
-      <main>
-        <header>
-          <div className='container mx-auto'>
-            <div>
-              <h1 className='text-4xl'>{pageTitle}</h1>
-            </div>
+      <header>
+        <div className='container mx-auto'>
+          <div>
+            <h1 className='text-4xl'>{pageTitle}</h1>
           </div>
-        </header>
+        </div>
+      </header>
 
-        {shows.isLoading ? (
-          <Loader text='Fetching shows' />
-        ) : shows.isFetched ? (
-          shows.data?.shows ? (
-            <>
-              <div id='body' className='mb-5'>
-                <div className='container mx-auto'>
-                  <div className='grid grid-cols-4 gap-9'>
-                    {shows.data.shows.map((show) => (
-                      <div key={show.id}>
+      {shows.isLoading ? (
+        <Loader text='Fetching shows' />
+      ) : shows.isFetched ? (
+        shows.data?.shows ? (
+          <>
+            <div id='body' className='mb-5'>
+              <div className='container mx-auto'>
+                <div className='grid grid-cols-4 gap-9'>
+                  {shows.data.shows.map((show) => (
+                    <div key={show.id}>
+                      <Link
+                        className='relative flex h-24 border-4'
+                        href={`/episodes/${show.id}`}
+                      >
+                        <Image src={show.imageUrl} alt='' fill />
+                      </Link>
+                      <div className='flex justify-center text-xl'>
                         <Link
-                          className='relative flex h-24 border-4'
                           href={`/episodes/${show.id}`}
+                          className='hover:text-blue-700'
                         >
-                          <Image src={show.imageUrl} alt='' fill />
+                          {show.title}
                         </Link>
-                        <div className='flex justify-center text-xl'>
-                          <Link
-                            href={`/episodes/${show.id}`}
-                            className='hover:text-blue-700'
-                          >
-                            {show.title}
-                          </Link>
-                        </div>
                       </div>
-                    ))}
-                  </div>
+                    </div>
+                  ))}
+                </div>
 
-                  <div>
-                    <nav>
-                      <div className='mb-4 mt-4 flex justify-center'>
-                        {page > 1 && (
-                          <div>
-                            <Link
-                              className='ml-0 rounded-l-lg border bg-white px-3 py-2 leading-tight hover:text-blue-700'
-                              href={`/shows/${category}?page=${page - 1}`}
-                            >
-                              Page {page - 1}
-                            </Link>
-                          </div>
-                        )}
+                <div>
+                  <nav>
+                    <div className='mb-4 mt-4 flex justify-center'>
+                      {page > 1 && (
                         <div>
                           <Link
-                            className='ml-0 border bg-white px-3 py-2 leading-tight hover:text-blue-700'
-                            href={`/shows/${category}?page=${page}`}
+                            className='ml-0 rounded-l-lg border bg-white px-3 py-2 leading-tight hover:text-blue-700'
+                            href={`/shows/${category}?page=${page - 1}`}
                           >
-                            Page {page}
+                            Page {page - 1}
                           </Link>
                         </div>
-                        {shows.isFetched &&
-                          (shows.data?.nextPage ? (
-                            <div>
-                              <Link
-                                className='ml-0 rounded-r-lg border bg-white px-3 py-2 leading-tight hover:text-blue-700'
-                                href={`/shows/${category}?page=${page + 1}`}
-                              >
-                                Page {page + 1}
-                              </Link>
-                            </div>
-                          ) : null)}
+                      )}
+                      <div>
+                        <Link
+                          className='ml-0 border bg-white px-3 py-2 leading-tight hover:text-blue-700'
+                          href={`/shows/${category}?page=${page}`}
+                        >
+                          Page {page}
+                        </Link>
                       </div>
-                    </nav>
-                  </div>
+                      {shows.isFetched &&
+                        (shows.data?.nextPage ? (
+                          <div>
+                            <Link
+                              className='ml-0 rounded-r-lg border bg-white px-3 py-2 leading-tight hover:text-blue-700'
+                              href={`/shows/${category}?page=${page + 1}`}
+                            >
+                              Page {page + 1}
+                            </Link>
+                          </div>
+                        ) : null)}
+                    </div>
+                  </nav>
                 </div>
               </div>
-
-              <footer>
-                <div className='container mx-auto'>
-                  <div>
-                    This site does not store any files on its server. All
-                    contents are provided by non-affiliated third parties.
-                  </div>
-                </div>
-              </footer>
-            </>
-          ) : (
-            <Loader text='No shows found' />
-          )
-        ) : null}
-      </main>
+            </div>
+          </>
+        ) : (
+          <Loader text='No shows found' />
+        )
+      ) : null}
     </Layout>
   )
 }

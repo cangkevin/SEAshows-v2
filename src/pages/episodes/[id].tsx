@@ -20,97 +20,86 @@ const Episodes: NextPage = () => {
 
   return (
     <Layout title={pageTitle}>
-      <main>
-        <header>
-          <div className='container mx-auto'>
-            {episodes.data ? (
-              <div>
-                <h1 className='text-4xl'>
-                  {episodes.data.title} - Page {page}
-                </h1>
-              </div>
-            ) : null}
-          </div>
-        </header>
+      <header>
+        <div className='container mx-auto'>
+          {episodes.data ? (
+            <div>
+              <h1 className='text-4xl'>
+                {episodes.data.title} - Page {page}
+              </h1>
+            </div>
+          ) : null}
+        </div>
+      </header>
 
-        {episodes.isLoading ? <Loader text='Fetching episodes' /> : null}
+      {episodes.isLoading ? <Loader text='Fetching episodes' /> : null}
 
-        {episodes.isFetched ? (
-          episodes.data?.episodes ? (
-            <>
-              <div
-                style={{ minHeight: episodes.data.nextPage ? '100vh' : '95vh' }}
-              >
-                <div className='container mx-auto'>
-                  <div className='grid grid-cols-1 gap-1 text-center'>
-                    {episodes.data.episodes.map((episode, index) =>
-                      episode.id ? (
-                        <div key={`${episode.id}_${index}`}>
-                          <Link
-                            className='text-xl hover:text-blue-700'
-                            href={`/videos/${episode.id}`}
-                          >
-                            {episode.title}
-                          </Link>
-                        </div>
-                      ) : null,
-                    )}
-                  </div>
+      {episodes.isFetched ? (
+        episodes.data?.episodes ? (
+          <>
+            <div
+              style={{ minHeight: episodes.data.nextPage ? '100vh' : '95vh' }}
+            >
+              <div className='container mx-auto'>
+                <div className='grid grid-cols-1 gap-1 text-center'>
+                  {episodes.data.episodes.map((episode, index) =>
+                    episode.id ? (
+                      <div key={`${episode.id}_${index}`}>
+                        <Link
+                          className='text-xl hover:text-blue-700'
+                          href={`/videos/${episode.id}`}
+                        >
+                          {episode.title}
+                        </Link>
+                      </div>
+                    ) : null,
+                  )}
+                </div>
 
-                  {episodes.data.nextPage ? (
-                    <div>
-                      <nav>
-                        <div className='mb-4 mt-4 flex justify-center'>
-                          {page > 1 && (
-                            <div>
-                              <Link
-                                className='ml-0 rounded-l-lg border bg-white px-3 py-2 leading-tight hover:text-blue-700'
-                                href={`/episodes/${showId}?page=${page - 1}`}
-                              >
-                                Page {page - 1}
-                              </Link>
-                            </div>
-                          )}
+                {episodes.data.nextPage ? (
+                  <div>
+                    <nav>
+                      <div className='mb-4 mt-4 flex justify-center'>
+                        {page > 1 && (
                           <div>
                             <Link
-                              className='ml-0 border bg-white px-3 py-2 leading-tight hover:text-blue-700'
-                              href={`/episodes/${showId}?page=${page}`}
+                              className='ml-0 rounded-l-lg border bg-white px-3 py-2 leading-tight hover:text-blue-700'
+                              href={`/episodes/${showId}?page=${page - 1}`}
                             >
-                              Page {page}
+                              Page {page - 1}
                             </Link>
                           </div>
-                          {episodes.isFetched &&
-                            (episodes.data?.nextPage ? (
-                              <div>
-                                <Link
-                                  className='ml-0 rounded-r-lg border bg-white px-3 py-2 leading-tight hover:text-blue-700'
-                                  href={`/episodes/${showId}?page=${page + 1}`}
-                                >
-                                  Page {page + 1}
-                                </Link>
-                              </div>
-                            ) : null)}
+                        )}
+                        <div>
+                          <Link
+                            className='ml-0 border bg-white px-3 py-2 leading-tight hover:text-blue-700'
+                            href={`/episodes/${showId}?page=${page}`}
+                          >
+                            Page {page}
+                          </Link>
                         </div>
-                      </nav>
-                    </div>
-                  ) : null}
-                </div>
-              </div>
-
-              <footer>
-                <div className='container mx-auto'>
-                  <div>
-                    This site does not store any files on its server. All
-                    contents are provided by non-affiliated third parties.
+                        {episodes.isFetched &&
+                          (episodes.data?.nextPage ? (
+                            <div>
+                              <Link
+                                className='ml-0 rounded-r-lg border bg-white px-3 py-2 leading-tight hover:text-blue-700'
+                                href={`/episodes/${showId}?page=${page + 1}`}
+                              >
+                                Page {page + 1}
+                              </Link>
+                            </div>
+                          ) : null)}
+                      </div>
+                    </nav>
                   </div>
-                </div>
-              </footer>
-            </>
-          ) : (
-            <Loader text='No episodes found' />
-          )
-        ) : null}
-      </main>
+                ) : null}
+              </div>
+            </div>
+          </>
+        ) : (
+          <Loader text='No episodes found' />
+        )
+      ) : null}
     </Layout>
   )
 }

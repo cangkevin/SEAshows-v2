@@ -1,3 +1,4 @@
+import Footer from './Footer'
 import Head from 'next/head'
 import React from 'react'
 
@@ -15,7 +16,10 @@ const Layout = ({ title, children }: LayoutProps) => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      {children}
+      <main>
+        {children}
+        <Footer />
+      </main>
     </>
   )
 }
