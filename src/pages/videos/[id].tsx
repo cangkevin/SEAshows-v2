@@ -14,14 +14,12 @@ const Videos: NextPage = () => {
 
   return (
     <Layout>
-      <div className='container mx-auto'>
-        <Iframe
-          url={url}
-          height='100%'
-          width='100%'
-          className='mt-[2.5vh] h-[95vh]'
-        ></Iframe>
-      </div>
+      <Iframe
+        url={url}
+        height='100%'
+        width='100%'
+        className='h-[calc(100vh-4rem)]'
+      />
     </Layout>
   )
 }

@@ -20,81 +20,67 @@ const Episodes: NextPage = () => {
 
   return (
     <Layout title={pageTitle}>
-      <header>
-        <div className='container mx-auto'>
-          {episodes.data ? (
-            <div>
-              <h1 className='text-4xl'>
-                {episodes.data.title} - Page {page}
-              </h1>
-            </div>
-          ) : null}
-        </div>
-      </header>
+      {episodes.data ? (
+        <h2 className='text-2xl'>
+          {episodes.data.title} - Page {page}
+        </h2>
+      ) : null}
 
       {episodes.isLoading ? <Loader text='Fetching episodes' /> : null}
 
       {episodes.isFetched ? (
         episodes.data?.episodes ? (
           <>
-            <div
-              style={{ minHeight: episodes.data.nextPage ? '100vh' : '95vh' }}
-            >
-              <div className='container mx-auto'>
-                <div className='grid grid-cols-1 gap-1 text-center'>
-                  {episodes.data.episodes.map((episode, index) =>
-                    episode.id ? (
-                      <div key={`${episode.id}_${index}`}>
-                        <Link
-                          className='text-xl hover:text-blue-700'
-                          href={`/videos/${episode.id}`}
-                        >
-                          {episode.title}
-                        </Link>
-                      </div>
-                    ) : null,
-                  )}
-                </div>
-
-                {episodes.data.nextPage ? (
-                  <div>
-                    <nav>
-                      <div className='mb-4 mt-4 flex justify-center'>
-                        {page > 1 && (
-                          <div>
-                            <Link
-                              className='ml-0 rounded-l-lg border bg-white px-3 py-2 leading-tight hover:text-blue-700'
-                              href={`/episodes/${showId}?page=${page - 1}`}
-                            >
-                              Page {page - 1}
-                            </Link>
-                          </div>
-                        )}
-                        <div>
-                          <Link
-                            className='ml-0 border bg-white px-3 py-2 leading-tight hover:text-blue-700'
-                            href={`/episodes/${showId}?page=${page}`}
-                          >
-                            Page {page}
-                          </Link>
-                        </div>
-                        {episodes.isFetched &&
-                          (episodes.data?.nextPage ? (
-                            <div>
-                              <Link
-                                className='ml-0 rounded-r-lg border bg-white px-3 py-2 leading-tight hover:text-blue-700'
-                                href={`/episodes/${showId}?page=${page + 1}`}
-                              >
-                                Page {page + 1}
-                              </Link>
-                            </div>
-                          ) : null)}
-                      </div>
-                    </nav>
+            <div className='grid grid-cols-1 gap-1 text-center'>
+              {episodes.data.episodes.map((episode, index) =>
+                episode.id ? (
+                  <div key={`${episode.id}_${index}`}>
+                    <Link
+                      className='text-xl hover:text-blue-700'
+                      href={`/videos/${episode.id}`}
+                    >
+                      {episode.title}
+                    </Link>
                   </div>
-                ) : null}
-              </div>
+                ) : null,
+              )}
             </div>
+
+            {episodes.data.nextPage ? (
+              <nav>
+                <ul className='flex justify-center py-4'>
+                  {page > 1 && (
+                    <li>
+                      <Link
+                        className='ml-0 rounded-l-lg border bg-white px-3 py-2 leading-tight hover:text-blue-700'
+                        href={`/episodes/${showId}?page=${page - 1}`}
+                      >
+                        Page {page - 1}
+                      </Link>
+                    </li>
+                  )}
+                  <li>
+                    <Link
+                      className='ml-0 border bg-white px-3 py-2 leading-tight hover:text-blue-700'
+                      href={`/episodes/${showId}?page=${page}`}
+                    >
+                      Page {page}
+                    </Link>
+                  </li>
+                  {episodes.isFetched &&
+                    (episodes.data?.nextPage ? (
+                      <li>
+                        <Link
+                          className='ml-0 rounded-r-lg border bg-white px-3 py-2 leading-tight hover:text-blue-700'
+                          href={`/episodes/${showId}?page=${page + 1}`}
+                        >
+                          Page {page + 1}
+                        </Link>
+                      </li>
+                    ) : null)}
+                </ul>
+              </nav>
+            ) : null}
           </>
         ) : (
           <Loader text='No episodes found' />

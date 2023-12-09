@@ -1,4 +1,5 @@
 import Footer from './Footer'
+import Header from './Header'
 import Head from 'next/head'
 import React from 'react'
 
@@ -16,10 +17,11 @@ const Layout = ({ title, children }: LayoutProps) => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <main>
-        {children}
+      <div className='container mx-auto flex min-h-screen flex-col'>
+        <Header />
+        <main className='flex-1'>{children}</main>
         <Footer />
-      </main>
+      </div>
     </>
   )
 }
