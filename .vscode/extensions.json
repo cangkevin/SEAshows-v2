@@ -1,15 +1,19 @@
 {
   "recommendations": [
-    "bradlc.vscode-tailwindcss",
-    "yoavbls.pretty-ts-errors",
-    "esbenp.prettier-vscode",
-    "davidanson.vscode-markdownlint",
-    "bierner.markdown-mermaid",
-    "yzhang.markdown-all-in-one",
-    "oderwat.indent-rainbow",
-    "rohit-gohri.format-code-action",
+    "exodiusstudios.comment-anchors",
+    "editorconfig.editorconfig",
     "dbaeumer.vscode-eslint",
-    "editorconfig.editor",
-    "exodiusstudios.comment-anchors"
+    "pomdtr.excalidraw-editor",
+    "rohit-gohri.format-code-action",
+    "oderwat.indent-rainbow",
+    "yzhang.markdown-all-in-one",
+    "bierner.markdown-mermaid",
+    "davidanson.vscode-markdownlint",
+    "mushan.vscode-paste-image",
+    "esbenp.prettier-vscode",
+    "yoavbls.pretty-ts-errors",
+    "ban.spellright",
+    "bradlc.vscode-tailwindcss",
+    "usernamehw.errorlens"
   ]
 }
