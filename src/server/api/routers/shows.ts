@@ -5,17 +5,13 @@ import { z } from 'zod'
 
 import { env } from '~/env.mjs'
 import { createTRPCRouter, publicProcedure } from '~/server/api/trpc'
+import { type PaginationLink } from '~/utils/types'
 
 interface FeedItem {
   id: number
   title: string
   url: string
   imageUrl: string
-}
-
-interface PaginationLink {
-  linkText: string
-  url: string
 }
 
 export const showsRouter = createTRPCRouter({
