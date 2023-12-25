@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 
 import Layout from '~/components/Layout'
 import Loader from '~/components/Loader'
+import Pagination from '~/components/Pagination'
 import { api } from '~/utils/api'
 
 const Episodes: NextPage = () => {
@@ -47,39 +48,11 @@ const Episodes: NextPage = () => {
             </div>
 
             {episodes.data.nextPage ? (
-              <nav>
-                <ul className='flex justify-center py-4'>
-                  {page > 1 && (
-                    <li>
-                      <Link
-                        className='ml-0 rounded-l-lg border bg-white px-3 py-2 leading-tight hover:text-blue-700'
-                        href={`/episodes/${showId}?page=${page - 1}`}
-                      >
-                        Page {page - 1}
-                      </Link>
-                    </li>
-                  )}
-                  <li>
-                    <Link
-                      className='ml-0 border bg-white px-3 py-2 leading-tight hover:text-blue-700'
-                      href={`/episodes/${showId}?page=${page}`}
-                    >
-                      Page {page}
-                    </Link>
-                  </li>
-                  {episodes.isFetched &&
-                    (episodes.data?.nextPage ? (
-                      <li>
-                        <Link
-                          className='ml-0 rounded-r-lg border bg-white px-3 py-2 leading-tight hover:text-blue-700'
-                          href={`/episodes/${showId}?page=${page + 1}`}
-                        >
-                          Page {page + 1}
-                        </Link>
-                      </li>
-                    ) : null)}
-                </ul>
-              </nav>
+              <Pagination
+                currentPage={page}
+                resourceUri={`/episodes/${showId}`}
+                nextPage={episodes.data?.nextPage}
+              />
             ) : null}
           </>
         ) : (

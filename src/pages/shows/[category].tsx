@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 
 import Layout from '~/components/Layout'
 import Loader from '~/components/Loader'
+import Pagination from '~/components/Pagination'
 import { api } from '~/utils/api'
 
 const Shows: NextPage = () => {
@@ -46,39 +47,11 @@ const Shows: NextPage = () => {
               ))}
             </div>
 
-            <nav>
-              <ul className='flex justify-center py-4'>
-                {page > 1 && (
-                  <li>
-                    <Link
-                      className='ml-0 rounded-l-lg border bg-white px-3 py-2 leading-tight hover:text-blue-700'
-                      href={`/shows/${category}?page=${page - 1}`}
-                    >
-                      Page {page - 1}
-                    </Link>
-                  </li>
-                )}
-                <li>
-                  <Link
-                    className='ml-0 border bg-white px-3 py-2 leading-tight hover:text-blue-700'
-                    href={`/shows/${category}?page=${page}`}
-                  >
-                    Page {page}
-                  </Link>
-                </li>
-                {shows.isFetched &&
-                  (shows.data?.nextPage ? (
-                    <li>
-                      <Link
-                        className='ml-0 rounded-r-lg border bg-white px-3 py-2 leading-tight hover:text-blue-700'
-                        href={`/shows/${category}?page=${page + 1}`}
-                      >
-                        Page {page + 1}
-                      </Link>
-                    </li>
-                  ) : null)}
-              </ul>
-            </nav>
+            <Pagination
+              currentPage={page}
+              resourceUri={`/shows/${category}`}
+              nextPage={shows.data?.nextPage}
+            />
           </>
         ) : (
           <Loader text='No shows found' />
