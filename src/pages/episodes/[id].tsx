@@ -15,9 +15,39 @@ const Episodes: NextPage = () => {
   const page = parseInt(router.query.page as string) || 1
 
   const episodes = api.episodes.getEpisodes.useQuery({ showId, page })
+
   const pageTitle = episodes.data
     ? episodes.data.title + ` - Page ${page}`
     : null
+
+  const episodesElement = episodes.data?.episodes ? (
+    <>
+      <div className='grid grid-cols-1 gap-1 text-center'>
+        {episodes.data.episodes.map((episode, index) =>
+          episode.id ? (
+            <div key={`${episode.id}_${index}`}>
+              <Link
+                className='text-xl hover:text-blue-700'
+                href={`/videos/${episode.id}`}
+              >
+                {episode.title}
+              </Link>
+            </div>
+          ) : null,
+        )}
+      </div>
+
+      {episodes.data?.nextPage ? (
+        <Pagination
+          currentPage={page}
+          resourceUri={`/episodes/${showId}`}
+          nextPage={episodes.data.nextPage}
+        />
+      ) : null}
+    </>
+  ) : (
+    <Loader text='No episodes found' />
+  )
 
   return (
     <Layout title={pageTitle}>
@@ -29,36 +59,7 @@ const Episodes: NextPage = () => {
 
       {episodes.isLoading ? <Loader text='Fetching episodes' /> : null}
 
-      {episodes.isFetched ? (
-        episodes.data?.episodes ? (
-          <>
-            <div className='grid grid-cols-1 gap-1 text-center'>
-              {episodes.data.episodes.map((episode, index) =>
-                episode.id ? (
-                  <div key={`${episode.id}_${index}`}>
-                    <Link
-                      className='text-xl hover:text-blue-700'
-                      href={`/videos/${episode.id}`}
-                    >
-                      {episode.title}
-                    </Link>
-                  </div>
-                ) : null,
-              )}
-            </div>
-
-            {episodes.data.nextPage ? (
-              <Pagination
-                currentPage={page}
-                resourceUri={`/episodes/${showId}`}
-                nextPage={episodes.data?.nextPage}
-              />
-            ) : null}
-          </>
-        ) : (
-          <Loader text='No episodes found' />
-        )
-      ) : null}
+      {episodes.isFetched ? episodesElement : null}
     </Layout>
   )
 }
