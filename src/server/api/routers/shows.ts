@@ -39,7 +39,7 @@ export const showsRouter = createTRPCRouter({
             ) as string,
           ),
           title: item.title as string,
-          url: item.enclosure?.url as string, // TODO remove me
+          url: item.enclosure?.url as string,
           imageUrl: parse(item.content as string)
             .querySelector('img')
             ?.getAttribute('src') as string,
