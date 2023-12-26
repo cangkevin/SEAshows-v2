@@ -57,9 +57,11 @@ const Episodes: NextPage = () => {
         </h2>
       ) : null}
 
-      {episodes.isLoading ? <Loader text='Fetching episodes' /> : null}
-
-      {episodes.isFetched ? episodesElement : null}
+      {episodes.isLoading ? (
+        <Loader text='Fetching episodes' />
+      ) : episodes.isFetched ? (
+        episodesElement
+      ) : null}
     </Layout>
   )
 }
