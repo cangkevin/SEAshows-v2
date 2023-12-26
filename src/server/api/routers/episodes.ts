@@ -29,18 +29,58 @@ export const episodesRouter = createTRPCRouter({
         .then((response) => response.data)
 
       const feed = await new Parser({}).parseString(episodesResponse)
+      const legacyHost = new URL(env.DATA_SOURCE_BASE_URL).host
 
-      const feedItems: FeedItem[] = feed.items.map((item) => {
+      // NOTE - collect items that already have the video source URL directly in the response
+      const nonPaginationItems = feed.items.filter(
+        (item) => new URL(item.enclosure?.url as string).host !== legacyHost,
+      )
+
+      // NOTE - collect items that don't have a direct video source URL
+      let possiblePaginationItems = feed.items.filter(
+        (item) => new URL(item.enclosure?.url as string).host === legacyHost,
+      )
+
+      if (possiblePaginationItems.length > 0) {
+        possiblePaginationItems = await Promise.all(
+          possiblePaginationItems.map(async (item) => {
+            const videoUrl = new URL(item.enclosure?.url as string)
+
+            if (!item.title?.startsWith('Page ')) {
+              const nestedEpisodeResponse = await axios
+                .get<string>(videoUrl.href)
+                .then((response) => response.data)
+
+              const nestedEpisodesFeed = await new Parser({}).parseString(
+                nestedEpisodeResponse,
+              )
+
+              if (nestedEpisodesFeed.items.length > 0) {
+                item.enclosure = {
+                  url: nestedEpisodesFeed.items[0]?.enclosure?.url as string,
+                }
+              }
+            }
+
+            return item
+          }),
+        )
+      }
+
+      const feedItems: FeedItem[] = [
+        ...nonPaginationItems,
+        ...possiblePaginationItems,
+      ].map((item) => {
         const videoUrl = new URL(item.enclosure?.url as string)
 
         return {
           id: videoUrl.pathname.split('/').pop(),
           title: item.title as string,
-          url: item.enclosure?.url as string, // NOTE this could also be a video source as well
+          url: item.enclosure?.url as string,
         }
       })
 
-      // check if url string last entry in feedItems is a pagination link
+      // check if last entry in feedItems is a pagination link
       const lastEntry =
         feedItems.length > 0 ? feedItems[feedItems.length - 1] : undefined
 
