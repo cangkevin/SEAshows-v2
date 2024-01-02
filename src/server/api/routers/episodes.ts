@@ -6,10 +6,16 @@ import { env } from '~/env.mjs'
 import { createTRPCRouter, publicProcedure } from '~/server/api/trpc'
 import { type PaginationLink } from '~/utils/types'
 
+export interface EpisodeUrl {
+  language: string
+  url: string
+}
+
 interface FeedItem {
   id: string | undefined
   title: string
   url: string
+  alternateUrls?: EpisodeUrl[]
   videoSourceUrl?: string
 }
 
@@ -37,35 +43,9 @@ export const episodesRouter = createTRPCRouter({
       )
 
       // NOTE - collect items that don't have a direct video source URL
-      let possiblePaginationItems = feed.items.filter(
+      const possiblePaginationItems = feed.items.filter(
         (item) => new URL(item.enclosure?.url as string).host === legacyHost,
       )
-
-      if (possiblePaginationItems.length > 0) {
-        possiblePaginationItems = await Promise.all(
-          possiblePaginationItems.map(async (item) => {
-            const videoUrl = new URL(item.enclosure?.url as string)
-
-            if (!item.title?.startsWith('Page ')) {
-              const nestedEpisodeResponse = await axios
-                .get<string>(videoUrl.href)
-                .then((response) => response.data)
-
-              const nestedEpisodesFeed = await new Parser({}).parseString(
-                nestedEpisodeResponse,
-              )
-
-              if (nestedEpisodesFeed.items.length > 0) {
-                item.enclosure = {
-                  url: nestedEpisodesFeed.items[0]?.enclosure?.url as string,
-                }
-              }
-            }
-
-            return item
-          }),
-        )
-      }
 
       const feedItems: FeedItem[] = [
         ...nonPaginationItems,
@@ -73,10 +53,20 @@ export const episodesRouter = createTRPCRouter({
       ].map((item) => {
         const videoUrl = new URL(item.enclosure?.url as string)
 
-        return {
-          id: videoUrl.pathname.split('/').pop(),
-          title: item.title as string,
-          url: item.enclosure?.url as string,
+        if (videoUrl.host === legacyHost) {
+          const episodeId = videoUrl.searchParams.get('episodes') as string
+
+          return {
+            id: episodeId,
+            title: item.title as string,
+            url: videoUrl.href,
+          }
+        } else {
+          return {
+            id: videoUrl.pathname.split('/').pop(),
+            title: item.title as string,
+            url: item.enclosure?.url as string,
+          }
         }
       })
 
@@ -96,5 +86,51 @@ export const episodesRouter = createTRPCRouter({
         episodes,
         nextPage,
       }
+    }),
+
+  getEpisodeSources: publicProcedure
+    .input(
+      z.object({
+        episodeId: z.string(),
+      }),
+    )
+    .query(async ({ input }) => {
+      if (!Number.isInteger(Number(input.episodeId))) {
+        return {
+          sources: [
+            {
+              language: '',
+              url: `${env.NEXT_PUBLIC_VIDEO_SOURCE_BASE_URL}${input.episodeId}`,
+            },
+          ],
+        }
+      }
+
+      const episodeSourcesResponses = await axios
+        .get<string>(env.DATA_SOURCE_BASE_URL, {
+          params: { episodes: input.episodeId, nocache: 1 },
+        })
+        .then((response) => response.data)
+
+      const sources: EpisodeUrl[] = (
+        await new Parser({}).parseString(episodeSourcesResponses)
+      ).items.map((item) => {
+        const language = item.title?.substring(
+          item.title?.lastIndexOf('(') + 1,
+          item.title?.length - 1,
+        ) as string
+        const videoId = item.enclosure?.url
+          .split('?title')
+          .shift()
+          ?.split('/')
+          .pop() as string
+
+        return {
+          language,
+          url: `${env.NEXT_PUBLIC_VIDEO_SOURCE_BASE_URL}${videoId}`,
+        }
+      })
+
+      return { sources: sources }
     }),
 })
