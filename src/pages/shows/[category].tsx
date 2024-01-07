@@ -1,3 +1,4 @@
+import { categories } from '..'
 import { type NextPage } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -15,7 +16,10 @@ const Shows: NextPage = () => {
   const page = parseInt(router.query.page as string) || 1
 
   const shows = api.shows.getShows.useQuery({ category, page })
-  const pageTitle = `${category} - Page ${page}`
+  const categoryName = categories.find(
+    (showCategory) => showCategory.key === category,
+  )?.name as string
+  const pageTitle = `${categoryName} - Page ${page}`
 
   const showsElement = shows.data?.shows ? (
     <>
