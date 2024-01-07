@@ -6,7 +6,8 @@
     "build": "next build",
     "dev": "next dev",
     "lint": "next lint",
-    "start": "next start"
+    "start": "next start",
+    "test:e2e": "next build && npx playwright test"
   },
   "dependencies": {
     "@tanstack/react-query": "^4.28.0",
@@ -27,6 +28,7 @@
   "devDependencies": {
     "@commitlint/cli": "^17.5.1",
     "@commitlint/config-conventional": "^17.4.4",
+    "@playwright/test": "^1.40.1",
     "@trivago/prettier-plugin-sort-imports": "^4.1.1",
     "@types/eslint": "^8.21.3",
     "@types/node": "^18.15.5",
