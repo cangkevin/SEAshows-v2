@@ -48,7 +48,7 @@ const Videos: NextPage = () => {
                 onClick={() => {
                   setUrl(source.url)
                 }}
-                className={`rounded-md px-2 ${
+                className={`cursor-pointer rounded-md px-2 ${
                   url === source.url ? 'bg-blue-400' : 'bg-slate-200'
                 }`}
               >
