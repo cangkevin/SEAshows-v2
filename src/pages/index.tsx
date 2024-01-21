@@ -6,6 +6,7 @@ import Layout from '~/components/Layout'
 export const categories = [
   { key: 'hk-drama', name: 'HK Drama' },
   { key: 'hk-variety', name: 'HK Variety' },
+  { key: 'korean-drama-englishsubtitles', name: 'KR Drama' },
 ]
 
 const Home: NextPage = () => {
