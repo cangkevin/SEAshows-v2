@@ -1,0 +1,8 @@
+config:
+  target: http://localhost:3000/
+  engines:
+    playwright: {}
+  processor: "./processor.js"
+scenarios:
+  - engine: playwright
+    testFunction: "runLoadHomePage"
