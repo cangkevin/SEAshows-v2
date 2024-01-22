@@ -1,0 +1,26 @@
+config:
+  target: http://localhost:3000/
+  phases:
+    - name: warm-up
+      duration: 20
+      arrivalRate: 2
+      maxVusers: 10
+  engines:
+    playwright:
+      aggregateByName: true
+      contextOptions:
+        baseURL: http://localhost:3000/
+  processor: "./processor.ts"
+scenarios:
+  - name: load home page
+    engine: playwright
+    testFunction: "loadHomePage"
+  - name: load HK Drama page
+    engine: playwright
+    testFunction: "loadHKDramaCategoryPage"
+  - name: load HK Variety page
+    engine: playwright
+    testFunction: "loadHKVarietyCategoryPage"
+  - name: load KR Drama page
+    engine: playwright
+    testFunction: "loadKRDramaCategoryPage"
