@@ -10,7 +10,8 @@
     "dev": "next dev",
     "lint": "next lint",
     "start": "next start",
-    "test:e2e": "next build && npx playwright test"
+    "test:e2e": "npx playwright test",
+    "test:e2e:local": "next build && BASE_URL=http://127.0.0.1:3000/ npx playwright test"
   },
   "dependencies": {
     "@tanstack/react-query": "^4.28.0",

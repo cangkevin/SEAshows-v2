@@ -1,0 +1,66 @@
+name: Production CI/CD
+
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+  DATA_SOURCE_BASE_URL: ${{ secrets.DATA_SOURCE_BASE_URL }}
+  IMAGE_DOMAIN: ${{ secrets.IMAGE_DOMAIN }}
+  NEXT_PUBLIC_VIDEO_SOURCE_BASE_URL: ${{ secrets.NEXT_PUBLIC_VIDEO_SOURCE_BASE_URL }}
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  production:
+    name: Production Build and Deploy
+    runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.40.1
+    timeout-minutes: 10
+
+    environment:
+      name: Production
+      url: ${{ steps.deploy.outputs.url }}
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+      - name: Set Up Node 18
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: npm
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+      - name: Install Dependencies
+        run: npm ci && npx playwright install
+
+      - name: Lint Code
+        run: npm run lint
+
+      - name: Build and Run Local E2E Tests
+        run: npm run test:e2e:local
+        env:
+          HOME: /root
+
+      - name: Pull Vercel Environment
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Vercel Build
+        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Vercel Deploy
+        id: deploy
+        run: echo "url=$(vercel deploy --prod --skip-domain --prebuilt --token=${{ secrets.VERCEL_TOKEN }})" >> $GITHUB_OUTPUT
+
+      - name: Run Smoke Tests
+        run: npm run test:e2e
+        env:
+          HOME: /root
+          BASE_URL: ${{ steps.deploy.outputs.url }}
+
+      - name: Promote Deployment
+        run: vercel promote $DEPLOYMENT_URL --token=${{ secrets.VERCEL_TOKEN }}
+        env:
+          DEPLOYMENT_URL: ${{ steps.deploy.outputs.url }}
