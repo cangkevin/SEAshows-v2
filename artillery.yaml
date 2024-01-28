@@ -11,6 +11,29 @@ config:
       contextOptions:
         baseURL: http://localhost:3000/
   processor: "./processor.ts"
+  environments:
+    local:
+      target: http://localhost:3000/
+      phases:
+        - duration: 30
+          arrivalRate: 1
+          maxVusers: 5
+    production:
+      target: https://seashows-v2.vercel.app/
+      phases:
+        - duration: 30
+          arrivalRate: 2
+          maxVusers: 10
+  plugins:
+    ensure: {}
+
+  # NOTE - https://www.artillery.io/docs/reference/extensions/ensure
+  ensure:
+    thresholds:
+      - "browser.page.FCP.load HK Drama page.p99": 2000
+      - "browser.page.FCP.load HK Variety page.p99": 2000
+      - "browser.page.FCP.load KR Drama page.p99": 2000
+
 scenarios:
   - name: load home page
     engine: playwright
