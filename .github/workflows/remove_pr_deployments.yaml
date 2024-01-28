@@ -1,0 +1,36 @@
+name: Remove PR Preview Deployments
+
+permissions:
+  contents: read
+  statuses: write
+
+env:
+  VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+on:
+  pull_request:
+    types:
+      - closed
+
+jobs:
+  delete-deployments:
+    name: Delete Preview Deployments
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Extract Branch Name # NOTE -https://dev.to/thereis/how-to-remove-vercel-deployments-from-github-actions-4nfh
+        id: extract_branch
+        run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
+      - name: Hash Branch Name
+        id: hash_branch
+        run: echo -n "hash=$(echo -n "${{ steps.extract_branch.outputs.branch }}" | sha256sum | cut -d ' ' -f 1)" >> $GITHUB_OUTPUT
+
+      - name: Call delete-deployment-previews.sh script
+        env:
+          META_TAG: ${{ steps.hash_branch.outputs.hash }}
+        run: |
+          bash ./delete-deployment-previews.sh
