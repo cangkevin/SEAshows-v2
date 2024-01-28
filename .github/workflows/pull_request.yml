@@ -77,6 +77,23 @@ jobs: # NOTE - each job has their own runner which can be thought of an independ
           HOME: /root
           BASE_URL: ${{ steps.deploy.outputs.url }} # NOTE https://docs.github.com/en/actions/using-jobs/defining-outputs-for-jobs
 
+  load-test:
+    needs: preview
+    name: Load Testing
+    runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.41.1
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+      - name: Install Dependencies
+        run: npm ci
+      - name: Run Artillery Tests
+        run: npm run test:perf:preview
+        env:
+          HOME: /root
+          BASE_URL: ${{ needs.preview.outputs.preview-url }}
+
   preview-comment:
     needs: preview
     name: Share Preview URL
