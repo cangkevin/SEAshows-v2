@@ -22,7 +22,7 @@ jobs: # NOTE - each job has their own runner which can be thought of an independ
     name: PR Build and Deploy
     runs-on: ubuntu-latest
     container:
-      image: mcr.microsoft.com/playwright:v1.40.1
+      image: mcr.microsoft.com/playwright:v1.41.1
     timeout-minutes: 10
 
     # NOTE - https://davidmyers.dev/blog/how-to-deploy-to-vercel-with-github-actions
@@ -51,7 +51,7 @@ jobs: # NOTE - each job has their own runner which can be thought of an independ
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
       - name: Install Dependencies
-        run: npm ci && npx playwright install
+        run: npm ci
 
       - name: Lint Code
         run: npm run lint
