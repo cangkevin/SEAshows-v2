@@ -35,6 +35,14 @@ jobs: # NOTE - each job has their own runner which can be thought of an independ
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
+
+      - name: Extract Branch Name # NOTE -https://dev.to/thereis/how-to-remove-vercel-deployments-from-github-actions-4nfh
+        id: extract_branch
+        run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
+      - name: Hash Branch Name
+        id: hash_branch
+        run: echo -n "hash=$(echo -n "${{ steps.extract_branch.outputs.branch }}" | sha256sum | cut -d ' ' -f 1)" >> $GITHUB_OUTPUT
+
       - name: Set Up Node 18
         uses: actions/setup-node@v4
         with:
@@ -59,7 +67,9 @@ jobs: # NOTE - each job has their own runner which can be thought of an independ
         run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
       - name: Vercel Deploy
         id: deploy
-        run: echo "url=$(vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }})" >> $GITHUB_OUTPUT
+        run: echo "url=$(vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }} --meta base_hash=${{ env.META_TAG }})" >> $GITHUB_OUTPUT
+        env:
+          META_TAG: ${{ steps.hash_branch.outputs.hash }}-${{ github.run_number }}-${{ github.run_attempt }}
 
       - name: Run Smoke Tests
         run: npm run test:e2e
