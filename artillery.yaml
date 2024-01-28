@@ -1,5 +1,5 @@
 config:
-  target: http://localhost:3000/
+  target: "{{ $env.BASE_URL }}"
   phases:
     - name: warm-up
       duration: 20
@@ -9,17 +9,20 @@ config:
     playwright:
       aggregateByName: true
       contextOptions:
-        baseURL: http://localhost:3000/
+        baseURL: "{{ $env.BASE_URL }}"
   processor: "./processor.ts"
   environments:
     local:
-      target: http://localhost:3000/
       phases:
         - duration: 30
           arrivalRate: 1
           maxVusers: 5
+    preview:
+      phases:
+        - duration: 30
+          arrivalRate: 1
+          maxVusers: 10
     production:
-      target: https://seashows-v2.vercel.app/
       phases:
         - duration: 30
           arrivalRate: 2

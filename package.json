@@ -12,7 +12,9 @@
     "start": "next start",
     "test:e2e": "npx playwright test",
     "test:e2e:local": "next build && BASE_URL=http://127.0.0.1:3000/ npx playwright test",
-    "test:perf:local": "npx artillery run -e local artillery.yaml"
+    "test:perf:local": "BASE_URL=http://127.0.0.1:3000/ npx artillery run -e local artillery.yaml",
+    "test:perf:preview": "npx artillery run -e preview artillery.yaml",
+    "test:perf:production": "npx artillery run -e production artillery.yaml"
   },
   "dependencies": {
     "@tanstack/react-query": "^4.28.0",
