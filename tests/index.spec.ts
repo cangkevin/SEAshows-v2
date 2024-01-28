@@ -34,5 +34,6 @@ categories.forEach((category) => {
       .click()
 
     await expect(page).toHaveURL(new RegExp(`${category.key}\\?page=1`))
+    await expect(page).toHaveTitle(new RegExp(`${category.name}`))
   })
 })
