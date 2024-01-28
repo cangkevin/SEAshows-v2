@@ -32,7 +32,7 @@
   "devDependencies": {
     "@commitlint/cli": "^17.5.1",
     "@commitlint/config-conventional": "^17.4.4",
-    "@playwright/test": "^1.40.1",
+    "@playwright/test": "1.41.1",
     "@trivago/prettier-plugin-sort-imports": "^4.1.1",
     "@types/eslint": "^8.21.3",
     "@types/node": "^18.15.5",
@@ -56,6 +56,10 @@
     "prettier-plugin-tailwindcss": "^0.2.6",
     "tailwindcss": "^3.3.0",
     "typescript": "^5.0.2"
+  },
+  "overrides": {
+    "playwright": "1.41.1",
+    "@playwright/browser-chromium": "1.41.1"
   },
   "ct3aMetadata": {
     "initVersion": "7.10.1"
