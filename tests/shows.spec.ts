@@ -14,4 +14,22 @@ categories.forEach((category) => {
 
     await expect(page.locator('img').first()).toBeVisible()
   })
+
+  test(`pagination links on ${category.name}`, async ({ page }) => {
+    await page.goto(`/shows/${category.key}`)
+
+    const nextPageLink = page.getByRole('link', { name: /Page 2/ })
+    await expect(nextPageLink).toBeVisible()
+
+    await nextPageLink.click()
+    await expect(page).toHaveTitle(new RegExp(`${category.name} - Page 2`))
+    await expect(page).toHaveURL(new RegExp(`/shows/${category.key}\\?page=2`))
+
+    const prevPageLink = page.getByRole('link', { name: /Page 1/ })
+    await expect(prevPageLink).toBeVisible()
+
+    await prevPageLink.click()
+    await expect(page).toHaveTitle(new RegExp(`${category.name} - Page 1`))
+    await expect(page).toHaveURL(new RegExp(`/shows/${category.key}\\?page=1`))
+  })
 })
