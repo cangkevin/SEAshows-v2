@@ -36,6 +36,16 @@ jobs: # NOTE - each job has their own runner which can be thought of an independ
       - name: Checkout Code
         uses: actions/checkout@v4
 
+      - name: CalVer Release
+        uses: StephaneBour/actions-calver@master
+        id: calver
+        with:
+          release_branch: main
+          date_format: "%Y-%m-%d"
+          release: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Extract Branch Name # NOTE -https://dev.to/thereis/how-to-remove-vercel-deployments-from-github-actions-4nfh
         id: extract_branch
         run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
