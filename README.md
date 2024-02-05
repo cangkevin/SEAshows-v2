@@ -38,3 +38,5 @@ Then run the `npm run dev` command.
  for UI component development
 - Explore GitHub actions
  for implementing CI/CD
+- Modify tailwind classes to target mobile first and then override at larger breaks
+  - <https://tailwindcss.com/docs/responsive-design>
