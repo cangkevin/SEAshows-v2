@@ -13,22 +13,27 @@ const Pagination = ({
   resourceUri,
   nextPage,
 }: PaginationProps) => {
+  const baseStyles =
+    'ml-0 border bg-white px-3 py-2 leading-tight hover:text-blue-700'
+
   return (
     <nav>
       <ul className='flex justify-center py-4'>
-        {currentPage > 1 && (
+        {currentPage > 1 ? (
           <li>
             <Link
-              className='ml-0 rounded-l-lg border bg-white px-3 py-2 leading-tight hover:text-blue-700'
+              className={`${baseStyles} rounded-l-lg`}
               href={`${resourceUri}?page=${currentPage - 1}`}
             >
               Page {currentPage - 1}
             </Link>
           </li>
-        )}
+        ) : null}
         <li>
           <Link
-            className='ml-0 border bg-white px-3 py-2 leading-tight hover:text-blue-700'
+            className={`${baseStyles} ${
+              currentPage == 1 ? 'rounded-l-lg' : ''
+            } ${nextPage ? '' : 'rounded-r-lg'}`}
             href={`${resourceUri}?page=${currentPage}`}
           >
             Page {currentPage}
@@ -37,7 +42,7 @@ const Pagination = ({
         {nextPage ? (
           <li>
             <Link
-              className='ml-0 rounded-r-lg border bg-white px-3 py-2 leading-tight hover:text-blue-700'
+              className={`${baseStyles} rounded-r-lg`}
               href={`${resourceUri}?page=${currentPage + 1}`}
             >
               Page {currentPage + 1}
