@@ -3,7 +3,11 @@ type LoaderProps = {
 }
 
 const Loader = ({ text }: LoaderProps) => {
-  return <div className='flex flex-col items-center'>{text}</div>
+  return (
+    <div className='flex min-h-[calc(100vh-6rem)] flex-col items-center justify-center'>
+      {text}
+    </div>
+  )
 }
 
 export default Loader
