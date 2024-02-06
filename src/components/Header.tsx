@@ -1,8 +1,10 @@
 import Link from 'next/link'
 
-import { categories } from '~/pages'
+type HeaderProps = {
+  categories: Record<'key' | 'name', string>[]
+}
 
-const Header = () => {
+const Header = ({ categories }: HeaderProps) => {
   return (
     <header className='sticky left-0 top-0 z-50 h-16 w-full bg-white text-2xl'>
       <h1>
