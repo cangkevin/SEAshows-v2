@@ -4,20 +4,7 @@ import { z } from 'zod'
 
 import { env } from '~/env.mjs'
 import { createTRPCRouter, publicProcedure } from '~/server/api/trpc'
-import { type PaginationLink } from '~/utils/types'
-
-export interface EpisodeUrl {
-  language: string
-  url: string
-}
-
-interface FeedItem {
-  id: string | undefined
-  title: string
-  url: string
-  alternateUrls?: EpisodeUrl[]
-  videoSourceUrl?: string
-}
+import type { EpisodeFeedItem, EpisodeUrl, PaginationLink } from '~/utils/types'
 
 export const episodesRouter = createTRPCRouter({
   getEpisodes: publicProcedure
@@ -47,7 +34,7 @@ export const episodesRouter = createTRPCRouter({
         (item) => new URL(item.enclosure?.url as string).host === legacyHost,
       )
 
-      const feedItems: FeedItem[] = [
+      const feedItems: EpisodeFeedItem[] = [
         ...nonPaginationItems,
         ...possiblePaginationItems,
       ].map((item) => {

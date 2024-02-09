@@ -5,8 +5,8 @@ import Iframe from 'react-iframe'
 
 import Layout from '~/components/Layout'
 import Loader from '~/components/Loader'
-import { type EpisodeUrl } from '~/server/api/routers/episodes'
 import { api } from '~/utils/api'
+import { type EpisodeUrl } from '~/utils/types'
 
 const Videos: NextPage = () => {
   const router = useRouter()

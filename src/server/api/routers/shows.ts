@@ -5,14 +5,7 @@ import { z } from 'zod'
 
 import { env } from '~/env.mjs'
 import { createTRPCRouter, publicProcedure } from '~/server/api/trpc'
-import { type PaginationLink } from '~/utils/types'
-
-interface FeedItem {
-  id: number
-  title: string
-  url: string
-  imageUrl: string
-}
+import { type ShowFeedItem, type PaginationLink } from '~/utils/types'
 
 export const showsRouter = createTRPCRouter({
   getShows: publicProcedure
@@ -31,7 +24,7 @@ export const showsRouter = createTRPCRouter({
 
       const feed = await new Parser({}).parseString(showsResponse)
 
-      const feedItems: FeedItem[] = feed.items.map((item) => {
+      const feedItems: ShowFeedItem[] = feed.items.map((item) => {
         return {
           id: parseInt(
             new URL(item.enclosure?.url as string).searchParams.get(
