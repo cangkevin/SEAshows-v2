@@ -1,7 +1,6 @@
 import { type NextPage } from 'next'
-import Link from 'next/link'
 
-import Layout from '~/components/Layout'
+import HomeScreen from '~/components/HomeScreen'
 
 export const categories = [
   { key: 'hk-drama', name: 'HK Drama' },
@@ -10,21 +9,7 @@ export const categories = [
 ]
 
 const Home: NextPage = () => {
-  return (
-    <Layout title={'Home'}>
-      <nav>
-        <ul className='flex h-[calc(100vh-4rem)] flex-col justify-center text-center'>
-          {categories.map((category) => (
-            <li key={category.key}>
-              <Link href={`/shows/${category.key}?page=1`}>
-                {category.name}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </nav>
-    </Layout>
-  )
+  return <HomeScreen categories={categories} />
 }
 
 export default Home
