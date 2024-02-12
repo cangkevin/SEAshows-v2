@@ -6,6 +6,9 @@ const meta: Meta<typeof PlayerScreen> = {
   title: 'Screens/PlayerScreen',
   component: PlayerScreen,
   tags: ['autodocs'],
+  parameters: {
+    layout: 'fullscreen',
+  },
 }
 
 export default meta
