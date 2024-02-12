@@ -8,6 +8,9 @@ const meta: Meta<typeof EpisodesScreen> = {
   title: 'Screens/EpisodeScreen',
   component: EpisodesScreen,
   tags: ['autodocs'],
+  parameters: {
+    layout: 'fullscreen',
+  },
 }
 
 export default meta

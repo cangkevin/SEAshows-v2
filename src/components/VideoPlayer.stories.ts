@@ -5,6 +5,9 @@ import { expect, within } from '@storybook/test'
 const meta: Meta<typeof VideoPlayer> = {
   component: VideoPlayer,
   tags: ['autodocs'],
+  parameters: {
+    layout: 'fullscreen',
+  },
 }
 
 export default meta

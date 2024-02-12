@@ -6,6 +6,9 @@ const meta: Meta<typeof HomeScreen> = {
   title: 'Screens/HomeScreen',
   component: HomeScreen,
   tags: ['autodocs'],
+  parameters: {
+    layout: 'fullscreen',
+  },
 }
 
 export default meta

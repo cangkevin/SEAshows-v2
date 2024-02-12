@@ -6,6 +6,9 @@ const meta: Meta<typeof ShowsScreen> = {
   title: 'Screens/ShowsScreen',
   component: ShowsScreen,
   tags: ['autodocs'],
+  parameters: {
+    layout: 'fullscreen',
+  },
 }
 
 export default meta
