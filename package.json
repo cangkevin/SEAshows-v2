@@ -16,7 +16,8 @@
     "test:perf:preview": "npx artillery run -e preview artillery.yaml",
     "test:perf:production": "npx artillery run -e production artillery.yaml",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "test-storybook": "test-storybook"
   },
   "dependencies": {
     "@tanstack/react-query": "^4.28.0",
@@ -47,6 +48,7 @@
     "@storybook/nextjs": "^7.6.12",
     "@storybook/react": "^7.6.12",
     "@storybook/test": "^7.6.12",
+    "@storybook/test-runner": "^0.16.0",
     "@trivago/prettier-plugin-sort-imports": "^4.1.1",
     "@types/eslint": "^8.21.3",
     "@types/node": "^18.15.5",
