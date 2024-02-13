@@ -16,3 +16,16 @@ export const Default: Story = {
     thumbnailUrl: '',
   },
 }
+
+export const ClampedText: Story = {
+  args: {
+    id: 1,
+    name: 'this is a super long string intended to generate a clamp',
+    thumbnailUrl: '',
+  },
+  decorators: (Story) => (
+    <div className='w-48'>
+      <Story />
+    </div>
+  ),
+}
