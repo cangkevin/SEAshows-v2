@@ -28,7 +28,7 @@ const ShowsScreen = ({
     <>
       <h2 className='text-2xl'>{pageTitle}</h2>
       <div className='min-h-[calc(100vh-6rem)]'>
-        <div className='grid grid-cols-2 gap-4 md:grid-cols-4 lg:grid-cols-5'>
+        <div className='grid grid-cols-1 gap-4 md:grid-cols-4 lg:grid-cols-5'>
           {shows.map((show) => (
             <ShowListing
               key={show.id}
