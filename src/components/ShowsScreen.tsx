@@ -1,10 +1,9 @@
 import Layout from './Layout'
 import Loader from './Loader'
 import Pagination from './Pagination'
-import Image from 'next/image'
-import Link from 'next/link'
+import ShowListing from './ShowListing'
 
-import type { ShowFeedItem, PaginationLink } from '~/utils/types'
+import type { PaginationLink, ShowFeedItem } from '~/utils/types'
 
 type ShowsScreenProps = {
   title: string
@@ -29,24 +28,14 @@ const ShowsScreen = ({
     <>
       <h2 className='text-2xl'>{pageTitle}</h2>
       <div className='min-h-[calc(100vh-6rem)]'>
-        <div className='grid grid-cols-4 gap-9'>
+        <div className='grid grid-cols-2 gap-4 md:grid-cols-4 lg:grid-cols-5'>
           {shows.map((show) => (
-            <div key={show.id} className='flex flex-col'>
-              <Link
-                className='relative h-24 border-4'
-                href={`/episodes/${show.id}`}
-              >
-                <Image src={show.imageUrl} alt='' fill />
-              </Link>
-              <div className='text-center text-xl'>
-                <Link
-                  href={`/episodes/${show.id}`}
-                  className='hover:text-blue-700'
-                >
-                  {show.title}
-                </Link>
-              </div>
-            </div>
+            <ShowListing
+              key={show.id}
+              id={show.id}
+              name={show.title}
+              thumbnailUrl={show.imageUrl}
+            />
           ))}
         </div>
 
