@@ -89,11 +89,7 @@ export const EpisodesLoadedWithPagination: Story = {
     await expect(
       canvas.getAllByRole('link', { name: /episode/i }),
     ).toHaveLength(mockEpisodes.length)
-    await expect(
-      canvas.getByRole('link', { name: /page 1/i }),
-    ).toBeInTheDocument()
-    await expect(
-      canvas.getByRole('link', { name: /page 2/i }),
-    ).toBeInTheDocument()
+    await expect(canvas.getByRole('link', { name: '1' })).toBeInTheDocument()
+    await expect(canvas.getByRole('link', { name: '2' })).toBeInTheDocument()
   },
 }

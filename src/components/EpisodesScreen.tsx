@@ -1,16 +1,16 @@
 import Layout from './Layout'
 import Loader from './Loader'
-import Pagination from './Pagination'
+import ResourcePagination from './ResourcePagination'
 import Link from 'next/link'
 
-import type { EpisodeFeedItem, PaginationLink } from '~/utils/types'
+import type { EpisodeFeedItem, ResourcePaginationLink } from '~/utils/types'
 
 type EpisodesScreenProps = {
   showId: number
   title: string
   page: number
   episodes?: EpisodeFeedItem[]
-  nextPage?: PaginationLink
+  nextPage?: ResourcePaginationLink
   isLoading: boolean
 }
 
@@ -45,7 +45,7 @@ const EpisodesScreen = ({
       </div>
 
       {nextPage ? (
-        <Pagination
+        <ResourcePagination
           currentPage={page}
           resourceUri={`/episodes/${showId}`}
           nextPage={nextPage}

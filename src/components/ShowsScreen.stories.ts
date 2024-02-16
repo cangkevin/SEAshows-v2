@@ -64,9 +64,7 @@ export const ShowsLoaded: Story = {
     await expect(canvas.getAllByRole('link', { name: /title/i })).toHaveLength(
       mockShows.length,
     )
-    await expect(
-      canvas.getByRole('link', { name: /page 1/i }),
-    ).toBeInTheDocument()
+    await expect(canvas.getByRole('link', { name: '1' })).toBeInTheDocument()
   },
 }
 
@@ -92,11 +90,7 @@ export const ShowsLoadedWithPaginationLink: Story = {
     await expect(canvas.getAllByRole('link', { name: /title/i })).toHaveLength(
       50,
     )
-    await expect(
-      canvas.getByRole('link', { name: /page 1/i }),
-    ).toBeInTheDocument()
-    await expect(
-      canvas.getByRole('link', { name: /page 2/i }),
-    ).toBeInTheDocument()
+    await expect(canvas.getByRole('link', { name: '1' })).toBeInTheDocument()
+    await expect(canvas.getByRole('link', { name: '2' })).toBeInTheDocument()
   },
 }
