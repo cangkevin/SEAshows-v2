@@ -1,16 +1,16 @@
 import Layout from './Layout'
 import Loader from './Loader'
-import Pagination from './Pagination'
+import ResourcePagination from './ResourcePagination'
 import ShowListing from './ShowListing'
 
-import type { PaginationLink, ShowFeedItem } from '~/utils/types'
+import type { ResourcePaginationLink, ShowFeedItem } from '~/utils/types'
 
 type ShowsScreenProps = {
   title: string
   page: number
   category: string
   shows?: ShowFeedItem[]
-  nextPage?: PaginationLink
+  nextPage?: ResourcePaginationLink
   isLoading: boolean
 }
 
@@ -39,7 +39,7 @@ const ShowsScreen = ({
           ))}
         </div>
 
-        <Pagination
+        <ResourcePagination
           currentPage={page}
           resourceUri={`/shows/${category}`}
           nextPage={nextPage}

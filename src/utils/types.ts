@@ -1,4 +1,4 @@
-export type PaginationLink = {
+export type ResourcePaginationLink = {
   linkText: string
   url: string
 }

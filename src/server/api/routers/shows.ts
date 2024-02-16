@@ -5,7 +5,7 @@ import { z } from 'zod'
 
 import { env } from '~/env.mjs'
 import { createTRPCRouter, publicProcedure } from '~/server/api/trpc'
-import { type ShowFeedItem, type PaginationLink } from '~/utils/types'
+import type { ResourcePaginationLink, ShowFeedItem } from '~/utils/types'
 
 export const showsRouter = createTRPCRouter({
   getShows: publicProcedure
@@ -43,7 +43,7 @@ export const showsRouter = createTRPCRouter({
         feedItems.length > 0 ? feedItems[feedItems.length - 1] : undefined
 
       const shows = feedItems
-      let nextPage: PaginationLink | undefined = undefined
+      let nextPage: ResourcePaginationLink | undefined = undefined
       if (lastEntry?.title.startsWith('Page ')) {
         nextPage = { linkText: lastEntry.title, url: lastEntry.url }
         shows.pop()
