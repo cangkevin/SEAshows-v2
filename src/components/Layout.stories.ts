@@ -23,8 +23,8 @@ export const Default: Story = {
       canvas.getByRole('heading', { name: /SEAshows/i }),
     ).toBeInTheDocument()
     await expect(canvas.getByRole('list')).toBeInTheDocument()
-    await expect(canvas.getAllByRole('listitem')).toHaveLength(
-      categories.length,
+    await expect(canvas.getAllByRole('link')).toHaveLength(
+      categories.length + 1,
     )
     await expect(
       canvas.getByText(/this site does not store any files on its server/i),
