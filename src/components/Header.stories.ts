@@ -26,6 +26,6 @@ export const Default: Story = {
     const categories = canvas.getByRole('list')
     await expect(categories).toBeInTheDocument()
 
-    await expect(canvas.getAllByRole('listitem')).toHaveLength(2)
+    await expect(canvas.getAllByRole('link')).toHaveLength(3)
   },
 }

@@ -1,3 +1,4 @@
+import NavMenu from './NavMenu'
 import Link from 'next/link'
 
 type HeaderProps = {
@@ -10,17 +11,7 @@ const Header = ({ categories }: HeaderProps) => {
       <h1>
         <Link href='/'>SEAshows</Link>
       </h1>
-      <nav>
-        <ul className='flex flex-row space-x-4 text-base'>
-          {categories.map((category) => (
-            <li key={category.key}>
-              <Link href={`/shows/${category.key}?page=1`}>
-                {category.name}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </nav>
+      <NavMenu categories={categories} />
     </header>
   )
 }
