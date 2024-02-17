@@ -1,5 +1,6 @@
 import axios from 'axios'
 import Parser from 'rss-parser'
+import { titleCase } from 'title-case'
 import { z } from 'zod'
 
 import { env } from '~/env.mjs'
@@ -117,7 +118,7 @@ export const episodesRouter = createTRPCRouter({
           .pop() as string
 
         return {
-          language,
+          language: titleCase(language),
           url: `${env.NEXT_PUBLIC_VIDEO_SOURCE_BASE_URL}${videoId}`,
         }
       })
