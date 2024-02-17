@@ -1,3 +1,4 @@
+import { Button } from './ui/button'
 import { useEffect, useState } from 'react'
 import Iframe from 'react-iframe'
 
@@ -26,20 +27,19 @@ const VideoPlayer = ({ url, sources = [] }: VideoPlayerProps) => {
         width='100%'
         className='h-[calc(100vh-8rem)]'
       />
-      <div className='flex h-8 flex-row justify-center space-x-4'>
+      <div className='flex h-8 flex-row justify-center'>
         {sources.length > 1
           ? sources.map((source) => (
-              <div
+              <Button
                 key={source.url.split('/').pop()}
                 onClick={() => {
                   setVideoUrl(source.url)
                 }}
-                className={`cursor-pointer rounded-md px-2 text-center leading-8 ${
-                  videoUrl === source.url ? 'bg-blue-400' : 'bg-slate-200'
-                }`}
+                className='h-8'
+                variant={videoUrl === source.url ? 'default' : 'secondary'}
               >
                 {source.language}
-              </div>
+              </Button>
             ))
           : null}
       </div>
