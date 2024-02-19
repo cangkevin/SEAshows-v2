@@ -1,28 +1,29 @@
 import { type Page } from '@playwright/test'
+import { expect } from '@playwright/test'
 
 export async function loadHomePage(page: Page) {
   await page.goto('/')
 
-  await page.getByRole('heading', { name: /SEAShows/ }).isVisible()
+  await expect(page.getByRole('heading', { name: /SEAShows/i })).toBeVisible()
 }
 
 export async function loadHKDramaCategoryPage(page: Page) {
   await page.goto('/shows/hk-drama')
 
-  await page.getByRole('heading', { name: /HK Drama/ }).isVisible()
-  await page.locator('img').isVisible()
+  await expect(page.getByRole('heading', { name: /HK Drama/i })).toBeVisible()
+  expect(page.getByRole('img')).toBeTruthy()
 }
 
 export async function loadHKVarietyCategoryPage(page: Page) {
   await page.goto('/shows/hk-variety')
 
-  await page.getByRole('heading', { name: /HK Variety/ }).isVisible()
-  await page.locator('img').isVisible()
+  await expect(page.getByRole('heading', { name: /HK Variety/i })).toBeVisible()
+  expect(page.getByRole('img')).toBeTruthy()
 }
 
 export async function loadKRDramaCategoryPage(page: Page) {
   await page.goto('/shows/korean-drama-englishsubtitles')
 
-  await page.getByRole('heading', { name: /KR Drama/ }).isVisible()
-  await page.locator('img').isVisible()
+  await expect(page.getByRole('heading', { name: /KR Drama/i })).toBeVisible()
+  expect(page.getByRole('img')).toBeTruthy()
 }
