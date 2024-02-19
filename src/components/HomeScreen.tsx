@@ -8,7 +8,7 @@ type HomeScreenProps = {
 const HomeScreen = ({ categories }: HomeScreenProps) => {
   return (
     <Layout title={'Home'}>
-      <nav className='flex min-h-[calc(100vh-6rem)] flex-col justify-center text-center'>
+      <nav className='flex min-h-[calc(100dvh-6rem)] flex-col justify-center text-center'>
         <ul>
           {categories.map((category) => (
             <li key={category.key}>
