@@ -27,7 +27,7 @@ const EpisodesScreen = ({
   const episodesElement = episodes ? (
     <>
       <h2 className='text-2xl'>{pageTitle}</h2>
-      <div className='min-h-[calc(100vh-8rem)]'>
+      <div className='min-h-[calc(100dvh-8rem)]'>
         <div className='grid grid-cols-1 gap-1 text-center'>
           {episodes.map((episode, index) =>
             episode.id ? (

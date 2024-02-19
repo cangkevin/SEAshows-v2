@@ -15,7 +15,9 @@ const PlayerScreen = ({ sources, isLoading }: PlayerScreenProps) => {
       {isLoading ? (
         <Loader text='Fetching video' />
       ) : sources && sources.length >= 1 ? (
-        <VideoPlayer url={sources[0]?.url as string} sources={sources} />
+        <div className='min-h-[calc(100dvh-6rem)]'>
+          <VideoPlayer url={sources[0]?.url as string} sources={sources} />
+        </div>
       ) : (
         <Loader text='Unable to fetch video sources' />
       )}
