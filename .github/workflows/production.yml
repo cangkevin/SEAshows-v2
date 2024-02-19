@@ -18,7 +18,7 @@ jobs:
     name: Production Build and Deploy
     runs-on: ubuntu-latest
     container:
-      image: mcr.microsoft.com/playwright:v1.41.1
+      image: mcr.microsoft.com/playwright:v1.41.2
     timeout-minutes: 10
 
     environment:
