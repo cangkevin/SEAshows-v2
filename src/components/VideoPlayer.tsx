@@ -25,7 +25,7 @@ const VideoPlayer = ({ url, sources = [] }: VideoPlayerProps) => {
         <Iframe
           key={videoUrl} // NOTE to prevent from pushing on the history; https://www.aleksandrhovhannisyan.com/blog/react-iframes-back-navigation-bug/
           url={videoUrl}
-          height='99.5%'
+          height='99.7%'
           width='100%'
         />
       </AspectRatio>
