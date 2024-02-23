@@ -5,24 +5,20 @@ import { z } from 'zod'
 
 import { env } from '~/env.mjs'
 import { createTRPCRouter, publicProcedure } from '~/server/api/trpc'
-import type {
-  EpisodeFeedItem,
-  EpisodeUrl,
-  ResourcePaginationLink,
-} from '~/utils/types'
+import type { EpisodeFeedItem, EpisodeUrl } from '~/utils/types'
 
 export const episodesRouter = createTRPCRouter({
   getEpisodes: publicProcedure
     .input(
       z.object({
         showId: z.number(),
-        page: z.number().min(1).optional().default(1),
+        cursor: z.number().min(1).optional().default(1),
       }),
     )
     .query(async ({ input }) => {
       const episodesResponse = await axios
         .get<string>(env.DATA_SOURCE_BASE_URL, {
-          params: { film: input.showId, nocache: 1, page: input.page },
+          params: { film: input.showId, nocache: 1, page: input.cursor },
         })
         .then((response) => response.data)
 
@@ -67,9 +63,9 @@ export const episodesRouter = createTRPCRouter({
         feedItems.length > 0 ? feedItems[feedItems.length - 1] : undefined
 
       const episodes = feedItems
-      let nextPage: ResourcePaginationLink | undefined = undefined
+      let nextPage: number | undefined = undefined
       if (lastEntry?.title.startsWith('Page ')) {
-        nextPage = { linkText: lastEntry.title, url: lastEntry.url }
+        nextPage = input.cursor + 1
         episodes.pop()
       }
 

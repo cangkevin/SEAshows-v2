@@ -22,9 +22,7 @@ const mockEpisodes: EpisodeFeedItem[] = [...Array(50).keys()].map((i) => {
 
 export const LoadingEpisodes: Story = {
   args: {
-    showId: 1,
     title: 'Show title',
-    page: 1,
     isLoading: true,
   },
   play: async ({ canvasElement }) => {
@@ -36,9 +34,7 @@ export const LoadingEpisodes: Story = {
 
 export const NoEpisodesLoaded: Story = {
   args: {
-    showId: 1,
     title: 'Show title',
-    page: 1,
     isLoading: false,
   },
   play: async ({ canvasElement }) => {
@@ -50,9 +46,7 @@ export const NoEpisodesLoaded: Story = {
 
 export const EpisodesLoaded: Story = {
   args: {
-    showId: 1,
     title: 'Show title',
-    page: 1,
     isLoading: false,
     episodes: mockEpisodes,
   },
@@ -61,35 +55,31 @@ export const EpisodesLoaded: Story = {
 
     await expect(
       canvas.getByRole('heading', { level: 2 }).textContent,
-    ).toContain('Show title - Page 1')
+    ).toContain('Show title episodes')
     await expect(
       canvas.getAllByRole('link', { name: /episode/i }),
     ).toHaveLength(mockEpisodes.length)
   },
 }
 
-export const EpisodesLoadedWithPagination: Story = {
+export const LoadingMoreEpisodes: Story = {
   args: {
-    showId: 1,
     title: 'Show title',
-    page: 1,
     isLoading: false,
-    episodes: mockEpisodes,
-    nextPage: {
-      linkText: 'Page 2',
-      url: '',
-    },
+    episodes: mockEpisodes.slice(0, 10),
+    isFetchingNextPage: true,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)
 
     await expect(
       canvas.getByRole('heading', { level: 2 }).textContent,
-    ).toContain('Show title - Page 1')
+    ).toContain('Show title episodes')
     await expect(
       canvas.getAllByRole('link', { name: /episode/i }),
-    ).toHaveLength(mockEpisodes.length)
-    await expect(canvas.getByRole('link', { name: '1' })).toBeInTheDocument()
-    await expect(canvas.getByRole('link', { name: '2' })).toBeInTheDocument()
+    ).toHaveLength(10)
+    await expect(
+      canvas.getByRole('img', { name: 'Loading' }),
+    ).toBeInTheDocument()
   },
 }

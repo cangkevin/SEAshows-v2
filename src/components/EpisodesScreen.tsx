@@ -1,28 +1,56 @@
 import Layout from './Layout'
 import Loader from './Loader'
-import ResourcePagination from './ResourcePagination'
+import { Spinner } from './ui/spinner'
 import Link from 'next/link'
+import { InView } from 'react-intersection-observer'
 
-import type { EpisodeFeedItem, ResourcePaginationLink } from '~/utils/types'
+import type { EpisodeFeedItem } from '~/utils/types'
+
+type EpisodeLinkProps = {
+  id: string
+  title: string
+  isPaginationTrigger: boolean
+  fetchNextPage: () => void
+}
+
+const EpisodeLink = ({
+  id,
+  title,
+  isPaginationTrigger,
+  fetchNextPage,
+}: EpisodeLinkProps) => {
+  // NOTE conditional rendering of components - https://stackoverflow.com/q/57945969
+  const Comp = isPaginationTrigger ? InView : 'div'
+  return (
+    <Comp
+      key={id}
+      onChange={
+        Comp === 'div' ? undefined : (inView) => inView && fetchNextPage()
+      }
+    >
+      <Link className='text-xl hover:text-blue-700' href={`/videos/${id}`}>
+        {title}
+      </Link>
+    </Comp>
+  )
+}
 
 type EpisodesScreenProps = {
-  showId: number
   title: string
-  page: number
   episodes?: EpisodeFeedItem[]
-  nextPage?: ResourcePaginationLink
   isLoading: boolean
+  isFetchingNextPage: boolean
+  fetchNextPage: () => void
 }
 
 const EpisodesScreen = ({
-  showId,
   title,
-  page,
   episodes,
-  nextPage,
   isLoading,
+  isFetchingNextPage,
+  fetchNextPage,
 }: EpisodesScreenProps) => {
-  const pageTitle = `${title} - Page ${page}`
+  const pageTitle = `${title} episodes`
 
   const episodesElement = episodes ? (
     <>
@@ -31,26 +59,18 @@ const EpisodesScreen = ({
         <div className='grid grid-cols-1 gap-1 text-center'>
           {episodes.map((episode, index) =>
             episode.id ? (
-              <div key={`${episode.id}_${index}`}>
-                <Link
-                  className='text-xl hover:text-blue-700'
-                  href={`/videos/${episode.id}`}
-                >
-                  {episode.title}
-                </Link>
-              </div>
+              <EpisodeLink
+                key={`${episode.id}_${index}`}
+                id={episode.id}
+                title={episode.title}
+                isPaginationTrigger={index + 1 === episodes.length}
+                fetchNextPage={fetchNextPage}
+              />
             ) : null,
           )}
+          {isFetchingNextPage && <Spinner className='flex justify-center' />}
         </div>
       </div>
-
-      {nextPage ? (
-        <ResourcePagination
-          currentPage={page}
-          resourceUri={`/episodes/${showId}`}
-          nextPage={nextPage}
-        />
-      ) : null}
     </>
   ) : (
     <Loader text='No episodes found' />

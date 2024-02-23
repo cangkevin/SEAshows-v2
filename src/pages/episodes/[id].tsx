@@ -9,19 +9,28 @@ const Episodes: NextPage = () => {
 
   const { id } = router.query
   const showId = parseInt(id as string)
-  const page = parseInt(router.query.page as string) || 1
 
-  const episodes = api.episodes.getEpisodes.useQuery({ showId, page })
-  const data = episodes.data
+  const { data, isLoading, isFetching, isFetchingNextPage, fetchNextPage } =
+    api.episodes.getEpisodes.useInfiniteQuery(
+      { showId },
+      {
+        getNextPageParam: (lastPage) => lastPage.nextPage,
+        initialCursor: 1,
+      },
+    )
+  const fetchedData = data?.pages.flat() || []
+  const episodes = fetchedData.flatMap((page) => page.episodes)
+  const title = fetchedData[0]?.title || ''
 
   return (
     <EpisodesScreen
-      showId={showId}
-      title={data?.title as string}
-      episodes={data?.episodes}
-      nextPage={data?.nextPage}
-      page={page}
-      isLoading={episodes.isLoading}
+      title={title}
+      episodes={episodes}
+      isLoading={isLoading}
+      isFetchingNextPage={isFetchingNextPage}
+      // NOTE adding "void" since we don't use the return value - https://github.com/orgs/react-hook-form/discussions/8622#discussioncomment-3950935
+      // also adding isFetching check as recommended practice - https://tanstack.com/query/latest/docs/framework/react/guides/infinite-queries
+      fetchNextPage={() => !isFetching && void fetchNextPage()}
     />
   )
 }
