@@ -79,7 +79,7 @@ export const LoadingMoreEpisodes: Story = {
       canvas.getAllByRole('link', { name: /episode/i }),
     ).toHaveLength(10)
     await expect(
-      canvas.getByRole('img', { name: 'Loading' }),
+      canvas.getByRole('status', { name: 'Loading' }),
     ).toBeInTheDocument()
   },
 }
