@@ -14,7 +14,7 @@ const ShowListing = ({ id, name, thumbnailUrl }: ShowListingProps) => {
         className='relative h-24 rounded-lg border-2'
         href={`/episodes/${id}`}
       >
-        <Image src={thumbnailUrl} alt='' fill />
+        <Image src={thumbnailUrl} alt={name} fill />
       </Link>
       <div className='line-clamp-2 text-center md:text-lg'>
         <Link
