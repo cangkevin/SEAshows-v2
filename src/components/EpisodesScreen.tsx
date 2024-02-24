@@ -68,7 +68,7 @@ const EpisodesScreen = ({
               />
             ) : null,
           )}
-          {isFetchingNextPage && <Spinner className='flex justify-center' />}
+          {isFetchingNextPage && <Spinner className='flex justify-center items-center' />}
         </div>
       </div>
     </>
