@@ -62,7 +62,7 @@ export const ShowsLoaded: Story = {
     ).toContain('Title - Page 1')
     await expect(canvas.getAllByRole('img')).toHaveLength(mockShows.length)
     await expect(canvas.getAllByRole('link', { name: /title/i })).toHaveLength(
-      mockShows.length,
+      mockShows.length * 2,
     )
     await expect(canvas.getByRole('link', { name: '1' })).toBeInTheDocument()
   },
@@ -86,9 +86,9 @@ export const ShowsLoadedWithPaginationLink: Story = {
     await expect(
       canvas.getByRole('heading', { level: 2 }).textContent,
     ).toContain(`Title - Page 1`)
-    await expect(canvas.getAllByRole('img')).toHaveLength(50)
+    await expect(canvas.getAllByRole('img')).toHaveLength(mockShows.length)
     await expect(canvas.getAllByRole('link', { name: /title/i })).toHaveLength(
-      50,
+      mockShows.length * 2,
     )
     await expect(canvas.getByRole('link', { name: '1' })).toBeInTheDocument()
     await expect(canvas.getByRole('link', { name: '2' })).toBeInTheDocument()
