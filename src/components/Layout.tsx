@@ -19,11 +19,9 @@ const Layout = ({ title, children }: LayoutProps) => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <div className='container mx-auto flex flex-col px-4'>
-        <Header categories={categories} />
-        <main className='flex-1'>{children}</main>
-        <Footer />
-      </div>
+      <Header categories={categories} />
+      <main>{children}</main>
+      <Footer />
     </>
   )
 }

@@ -27,26 +27,26 @@ const VideoPlayer = ({ url, sources = [] }: VideoPlayerProps) => {
           url={videoUrl}
           height='99.7%'
           width='100%'
-          className='rounded-2xl'
+          className='md:rounded-2xl'
         />
       </AspectRatio>
 
-      <div className='flex h-8 flex-row justify-center'>
-        {sources.length > 1
-          ? sources.map((source) => (
-              <Button
-                key={source.url.split('/').pop()}
-                onClick={() => {
-                  setVideoUrl(source.url)
-                }}
-                className='h-8'
-                variant={videoUrl === source.url ? 'default' : 'secondary'}
-              >
-                {source.language}
-              </Button>
-            ))
-          : null}
-      </div>
+      {sources.length > 1 && (
+        <div className='flex h-8 flex-row justify-center'>
+          {sources.map((source) => (
+            <Button
+              key={source.url.split('/').pop()}
+              onClick={() => {
+                setVideoUrl(source.url)
+              }}
+              className='h-8'
+              variant={videoUrl === source.url ? 'default' : 'secondary'}
+            >
+              {source.language}
+            </Button>
+          ))}
+        </div>
+      )}
     </>
   )
 }

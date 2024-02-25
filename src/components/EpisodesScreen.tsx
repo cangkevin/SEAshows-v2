@@ -53,7 +53,7 @@ const EpisodesScreen = ({
   const pageTitle = `${title} episodes`
 
   const episodesElement = episodes ? (
-    <>
+    <div className='container mx-auto'>
       <h2 className='text-2xl'>{pageTitle}</h2>
       <div className='min-h-[calc(100dvh-8rem)]'>
         <div className='grid grid-cols-1 gap-1 text-center'>
@@ -68,10 +68,12 @@ const EpisodesScreen = ({
               />
             ) : null,
           )}
-          {isFetchingNextPage && <Spinner className='flex justify-center items-center' />}
+          {isFetchingNextPage && (
+            <Spinner className='flex items-center justify-center' />
+          )}
         </div>
       </div>
-    </>
+    </div>
   ) : (
     <Loader text='No episodes found' />
   )

@@ -7,7 +7,7 @@ type HeaderProps = {
 
 const Header = ({ categories }: HeaderProps) => {
   return (
-    <header className='sticky left-0 top-0 z-50 h-16 w-full bg-white text-2xl'>
+    <header className='sticky left-0 top-0 z-50 h-16 bg-white px-6 text-2xl'>
       <h1>
         <Link href='/'>SEAshows</Link>
       </h1>
