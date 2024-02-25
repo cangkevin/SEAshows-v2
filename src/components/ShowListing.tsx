@@ -10,16 +10,13 @@ type ShowListingProps = {
 const ShowListing = ({ id, name, thumbnailUrl }: ShowListingProps) => {
   return (
     <div className='flex flex-col'>
-      <Link
-        className='relative h-24 rounded-lg border-2'
-        href={`/episodes/${id}`}
-      >
+      <Link className='relative h-24 rounded-lg border-2' href={`/watch/${id}`}>
         <Image src={thumbnailUrl} alt={name} fill />
       </Link>
       <div className='line-clamp-2 text-center md:text-lg'>
         <Link
           title={name}
-          href={`/episodes/${id}`}
+          href={`/watch/${id}`}
           className='hover:text-blue-700'
         >
           {name}

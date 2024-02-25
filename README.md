@@ -40,3 +40,6 @@ Then run the `npm run dev` command.
  for implementing CI/CD
 - Modify tailwind classes to target mobile first and then override at larger breaks
   - <https://tailwindcss.com/docs/responsive-design>
+- Design for 3xl screen (1600px)
+  - 1280px is ideal size for video
+  - Consider use of 1.5rem for padding/margin

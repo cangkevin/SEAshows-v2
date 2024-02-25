@@ -25,7 +25,7 @@ const ShowsScreen = ({
   const pageTitle = `${title} - Page ${page}`
 
   const showsElement = shows ? (
-    <>
+    <div className='container mx-auto'>
       <h2 className='text-2xl'>{pageTitle}</h2>
       <div className='min-h-[calc(100dvh-6rem)]'>
         <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5'>
@@ -45,7 +45,7 @@ const ShowsScreen = ({
           nextPage={nextPage}
         />
       </div>
-    </>
+    </div>
   ) : (
     <Loader text='No shows found' />
   )
