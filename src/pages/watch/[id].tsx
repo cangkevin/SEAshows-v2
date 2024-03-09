@@ -22,7 +22,7 @@ const Watch: NextPage = () => {
   const fetchedData = data?.pages.flat() || []
   const episodes = fetchedData.flatMap((page) => page.episodes)
 
-  const [selected, setSelected] = useState(0)
+  const [selected, setSelected] = useState<number>(0)
   const { data: sourcesData, isLoading: isLoadingSources } =
     api.episodes.getEpisodeSources.useQuery(
       { episodeId: episodes[selected]?.id as string },
@@ -36,6 +36,7 @@ const Watch: NextPage = () => {
       title={title}
       episodes={episodes}
       sources={sources}
+      selectedIndex={selected}
       isLoadingShow={isLoading}
       isLoadingSources={isLoadingSources}
       isFetchingNextPage={isFetchingNextPage}
