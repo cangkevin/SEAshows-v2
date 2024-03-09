@@ -1,10 +1,11 @@
 type LoaderProps = {
   text: string
+  className?: string
 }
 
-const Loader = ({ text }: LoaderProps) => {
+const Loader = ({ text, className = '' }: LoaderProps) => {
   return (
-    <div className='flex min-h-[calc(100dvh-6rem)] flex-col items-center justify-center'>
+    <div className={`flex flex-col items-center justify-center ${className}`}>
       {text}
     </div>
   )

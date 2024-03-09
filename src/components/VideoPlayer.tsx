@@ -27,7 +27,7 @@ const VideoPlayer = ({ url, sources = [] }: VideoPlayerProps) => {
           url={videoUrl}
           height='99.7%'
           width='100%'
-          className='md:rounded-2xl'
+          className='rounded-xl'
         />
       </AspectRatio>
 

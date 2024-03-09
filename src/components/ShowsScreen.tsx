@@ -25,7 +25,7 @@ const ShowsScreen = ({
   const pageTitle = `${title} - Page ${page}`
 
   const showsElement = shows ? (
-    <div className='container mx-auto'>
+    <div className='container mx-auto px-2'>
       <h2 className='text-2xl'>{pageTitle}</h2>
       <div className='min-h-[calc(100dvh-6rem)]'>
         <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5'>
@@ -47,12 +47,16 @@ const ShowsScreen = ({
       </div>
     </div>
   ) : (
-    <Loader text='No shows found' />
+    <Loader className='min-h-[calc(100dvh-6rem)]' text='No shows found' />
   )
 
   return (
     <Layout title={pageTitle}>
-      {isLoading ? <Loader text='Fetching shows' /> : showsElement}
+      {isLoading ? (
+        <Loader className='min-h-[calc(100dvh-6rem)]' text='Fetching shows' />
+      ) : (
+        showsElement
+      )}
     </Layout>
   )
 }
