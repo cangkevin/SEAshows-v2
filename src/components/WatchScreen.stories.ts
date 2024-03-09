@@ -30,6 +30,7 @@ const mockSources = [
 export const FetchingShow: Story = {
   args: {
     title: 'Show name',
+    selectedIndex: 0,
     isLoadingShow: true,
   },
 }
@@ -37,6 +38,7 @@ export const FetchingShow: Story = {
 export const NoShowFetched: Story = {
   args: {
     title: 'Show name',
+    selectedIndex: 0,
     isLoadingShow: false,
     episodes: [],
   },
@@ -45,6 +47,7 @@ export const NoShowFetched: Story = {
 export const LoadingSources: Story = {
   args: {
     title: 'Show name',
+    selectedIndex: 0,
     isLoadingShow: false,
     isLoadingSources: true,
     episodes: mockEpisodes,
@@ -54,6 +57,7 @@ export const LoadingSources: Story = {
 export const ShowEpisodesFetched: Story = {
   args: {
     title: 'Show name',
+    selectedIndex: 0,
     isLoadingShow: false,
     isLoadingSources: false,
     episodes: mockEpisodes.slice(0, 10),
@@ -64,6 +68,7 @@ export const ShowEpisodesFetched: Story = {
 export const ShowEpisodesFetchedWithOverflow: Story = {
   args: {
     title: 'Show name',
+    selectedIndex: 0,
     isLoadingShow: false,
     isLoadingSources: false,
     episodes: mockEpisodes,
@@ -74,6 +79,7 @@ export const ShowEpisodesFetchedWithOverflow: Story = {
 export const FetchingMoreEpisodes: Story = {
   args: {
     title: 'Show name',
+    selectedIndex: 0,
     isLoadingShow: false,
     isLoadingSources: false,
     episodes: mockEpisodes,
@@ -85,6 +91,7 @@ export const FetchingMoreEpisodes: Story = {
 export const WithMultipleVideoSources: Story = {
   args: {
     title: 'Show name',
+    selectedIndex: 0,
     isLoadingShow: false,
     isLoadingSources: false,
     episodes: mockEpisodes,
