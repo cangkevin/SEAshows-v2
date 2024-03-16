@@ -2,6 +2,7 @@ import Layout from './Layout'
 import Loader from './Loader'
 import VideoPlayer from './VideoPlayer'
 import { Spinner } from './ui/spinner'
+import { clsx } from 'clsx'
 import { type Dispatch, type SetStateAction } from 'react'
 import { InView } from 'react-intersection-observer'
 
@@ -102,9 +103,9 @@ const EpisodeLink = ({
   return (
     <Comp
       key={id}
-      className={`${
-        id.split('_')[1] === selectedIndex.toString() ? 'bg-neutral-200' : ''
-      } rounded-lg`}
+      className={clsx(
+        id.endsWith(`_${selectedIndex.toString()}`) && 'bg-neutral-300',
+      )}
       onClick={onClick}
       onChange={
         Comp === 'div' ? undefined : (inView) => inView && fetchNextPage()
