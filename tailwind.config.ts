@@ -16,8 +16,8 @@ const config = {
     extend: {
       container: {
         screens: {
-          '3xl': '1600px'
-        }
+          '3xl': '1600px',
+        },
       },
       colors: {
         border: 'hsl(var(--border))',

@@ -104,7 +104,8 @@ const EpisodeLink = ({
     <Comp
       key={id}
       className={clsx(
-        id.endsWith(`_${selectedIndex.toString()}`) && 'bg-neutral-300',
+        id.endsWith(`_${selectedIndex.toString()}`) &&
+          'rounded-md bg-neutral-300 dark:bg-neutral-600',
       )}
       onClick={onClick}
       onChange={
