@@ -1,4 +1,5 @@
 import NavMenu from './NavMenu'
+import ThemeSwitch from './ui/theme-switch'
 import Link from 'next/link'
 
 type HeaderProps = {
@@ -7,10 +8,13 @@ type HeaderProps = {
 
 const Header = ({ categories }: HeaderProps) => {
   return (
-    <header className='sticky left-0 top-0 z-50 h-16 bg-white px-6 text-2xl'>
-      <h1>
-        <Link href='/'>SEAshows</Link>
-      </h1>
+    <header className='sticky left-0 top-0 z-50 h-16 bg-background px-6 text-2xl'>
+      <div className='flex justify-between'>
+        <h1>
+          <Link href='/'>SEAshows</Link>
+        </h1>
+        <ThemeSwitch />
+      </div>
       <NavMenu categories={categories} />
     </header>
   )
