@@ -67,6 +67,6 @@ jobs:
           BASE_URL: ${{ steps.deploy.outputs.url }}
 
       - name: Promote Deployment
-        run: vercel promote $DEPLOYMENT_URL --token=${{ secrets.VERCEL_TOKEN }}
+        run: vercel promote $DEPLOYMENT_URL --token=${{ secrets.VERCEL_TOKEN }} --scope=cangkevins-projects
         env:
           DEPLOYMENT_URL: ${{ steps.deploy.outputs.url }}
