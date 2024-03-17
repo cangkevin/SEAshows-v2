@@ -1,6 +1,7 @@
 import Layout from './Layout'
 import Loader from './Loader'
 import VideoPlayer from './VideoPlayer'
+import { ScrollArea } from './ui/scroll-area'
 import { Spinner } from './ui/spinner'
 import { clsx } from 'clsx'
 import { type Dispatch, type SetStateAction } from 'react'
@@ -54,7 +55,7 @@ const WatchScreen = ({
                 />
               )}
             </div>
-            <div className='h-[calc(50dvh)] overflow-auto rounded-lg border text-center xl:col-span-2 xl:h-[calc(100dvh-8rem)]'>
+            <ScrollArea className='h-[calc(50dvh)] rounded-lg border text-center xl:col-span-2 xl:h-[calc(100dvh-8rem)]'>
               {episodes.map((episode, index) =>
                 episode.id ? (
                   <EpisodeLink
@@ -71,7 +72,7 @@ const WatchScreen = ({
               {isFetchingNextPage && (
                 <Spinner className='flex items-center justify-center' />
               )}
-            </div>
+            </ScrollArea>
           </div>
         </div>
       ) : (
@@ -104,17 +105,15 @@ const EpisodeLink = ({
     <Comp
       key={id}
       className={clsx(
-        id.endsWith(`_${selectedIndex.toString()}`) &&
-          'rounded-md bg-neutral-300 dark:bg-neutral-600',
+        'rounded-md hover:bg-muted',
+        id.endsWith(`_${selectedIndex.toString()}`) && 'bg-muted-foreground',
       )}
       onClick={onClick}
       onChange={
         Comp === 'div' ? undefined : (inView) => inView && fetchNextPage()
       }
     >
-      <span className='cursor-pointer text-xl hover:text-blue-700'>
-        {title}
-      </span>
+      <span className='cursor-pointer text-xl'>{title}</span>
     </Comp>
   )
 }
