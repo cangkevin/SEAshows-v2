@@ -49,10 +49,9 @@ const WatchScreen = ({
                   sources={sources}
                 />
               ) : (
-                <Loader
-                  className='h-full'
-                  text='Unable to load video sources'
-                />
+                <div className='flex h-full flex-col items-center justify-center'>
+                  Unable to load video sources
+                </div>
               )}
             </div>
             <ScrollArea className='h-[calc(50dvh)] rounded-lg border text-center xl:col-span-2 xl:h-[calc(100dvh-8rem)]'>
@@ -76,7 +75,9 @@ const WatchScreen = ({
           </div>
         </div>
       ) : (
-        <Loader className='min-h-[calc(100dvh-6rem)]' text='Show not found' />
+        <div className='flex min-h-[calc(100dvh-6rem)] flex-col items-center justify-center'>
+          Show not found
+        </div>
       )}
     </Layout>
   )
