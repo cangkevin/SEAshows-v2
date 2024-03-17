@@ -9,7 +9,7 @@ import { Switch } from '~/components/ui/switch'
 const ThemeSwitch = () => {
   // NOTE https://github.com/pacocoursey/next-themes?tab=readme-ov-file#avoid-hydration-mismatch
   const [mounted, setMounted] = useState(false)
-  const { theme, setTheme } = useTheme()
+  const { resolvedTheme, theme, setTheme } = useTheme()
 
   // useEffect only runs on the client, so now we can safely show the UI
   useEffect(() => {
@@ -20,16 +20,22 @@ const ThemeSwitch = () => {
     return null
   }
 
-  const ThemeIcon = theme === 'light' ? Sun : Moon
+  const currentTheme =
+    (theme === 'system'
+      ? resolvedTheme
+      : theme === 'light'
+      ? 'light'
+      : 'dark') || 'dark'
+  const ThemeIcon = currentTheme === 'light' ? Sun : Moon
 
   return (
     <div className='space-x-2'>
       <Switch
         id='dark-mode'
         className='align-middle'
-        checked={theme === 'dark'}
+        checked={currentTheme === 'dark'}
         onCheckedChange={() => {
-          setTheme(theme === 'light' ? 'dark' : 'light')
+          setTheme(currentTheme === 'light' ? 'dark' : 'light')
         }}
       />
       <ThemeIcon className='inline' />
