@@ -17,11 +17,7 @@ const ShowListing = ({ id, name, thumbnailUrl }: ShowListingProps) => {
         <Image src={thumbnailUrl} alt={name} fill />
       </Link>
       <div className='line-clamp-2 text-center md:text-lg'>
-        <Link
-          title={name}
-          href={`/watch/${id}`}
-          className='hover:text-blue-700'
-        >
+        <Link title={name} href={`/watch/${id}`}>
           {name}
         </Link>
       </div>
