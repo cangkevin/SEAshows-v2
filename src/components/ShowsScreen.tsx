@@ -47,7 +47,9 @@ const ShowsScreen = ({
       </div>
     </div>
   ) : (
-    <Loader className='min-h-[calc(100dvh-6rem)]' text='No shows found' />
+    <div className='flex min-h-[calc(100dvh-6rem)] flex-col items-center justify-center'>
+      No shows found
+    </div>
   )
 
   return (

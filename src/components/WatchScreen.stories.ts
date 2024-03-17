@@ -54,6 +54,17 @@ export const LoadingSources: Story = {
   },
 }
 
+export const UnableToLoadSources: Story = {
+  args: {
+    title: 'Show name',
+    selectedIndex: 0,
+    isLoadingShow: false,
+    isLoadingSources: false,
+    episodes: mockEpisodes,
+    sources: undefined,
+  },
+}
+
 export const ShowEpisodesFetched: Story = {
   args: {
     title: 'Show name',

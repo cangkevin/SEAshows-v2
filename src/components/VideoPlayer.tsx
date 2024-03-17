@@ -32,7 +32,7 @@ const VideoPlayer = ({ url, sources = [] }: VideoPlayerProps) => {
       </AspectRatio>
 
       {sources.length > 1 && (
-        <div className='flex h-8 flex-row justify-center'>
+        <div className='flex h-8 flex-row justify-center space-x-1'>
           {sources.map((source) => (
             <Button
               key={source.url.split('/').pop()}
