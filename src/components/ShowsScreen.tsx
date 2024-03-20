@@ -1,7 +1,7 @@
-import Layout from './Layout'
 import Loader from './Loader'
 import ResourcePagination from './ResourcePagination'
 import ShowListing from './ShowListing'
+import Head from 'next/head'
 
 import type { ResourcePaginationLink, ShowFeedItem } from '~/utils/types'
 
@@ -25,41 +25,41 @@ const ShowsScreen = ({
   const pageTitle = `${title} - Page ${page}`
 
   const showsElement = shows ? (
-    <div className='container mx-auto px-2'>
+    <div className='container mx-auto px-6 lg:px-2'>
       <h2 className='text-2xl'>{pageTitle}</h2>
-      <div className='min-h-[calc(100dvh-6rem)]'>
-        <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5'>
-          {shows.map((show) => (
-            <ShowListing
-              key={show.id}
-              id={show.id}
-              name={show.title}
-              thumbnailUrl={show.imageUrl}
-            />
-          ))}
-        </div>
 
-        <ResourcePagination
-          currentPage={page}
-          resourceUri={`/shows/${category}`}
-          nextPage={nextPage}
-        />
+      <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5'>
+        {shows.map((show) => (
+          <ShowListing
+            key={show.id}
+            id={show.id}
+            name={show.title}
+            thumbnailUrl={show.imageUrl}
+          />
+        ))}
       </div>
+
+      <ResourcePagination
+        currentPage={page}
+        resourceUri={`/shows/${category}`}
+        nextPage={nextPage}
+      />
     </div>
   ) : (
-    <div className='flex min-h-[calc(100dvh-6rem)] flex-col items-center justify-center'>
+    <div className='flex h-full items-center justify-center'>
       No shows found
     </div>
   )
 
   return (
-    <Layout title={pageTitle}>
-      {isLoading ? (
-        <Loader className='min-h-[calc(100dvh-6rem)]' text='Fetching shows' />
-      ) : (
-        showsElement
-      )}
-    </Layout>
+    <>
+      <Head>
+        <title>{title ? `${pageTitle} - SEAshows` : 'SEAshows'}</title>
+        <meta name='description' content={`${title} shows`} />
+      </Head>
+
+      {isLoading ? <Loader text='Fetching shows' /> : showsElement}
+    </>
   )
 }
 

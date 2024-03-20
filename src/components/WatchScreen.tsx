@@ -1,9 +1,9 @@
-import Layout from './Layout'
 import Loader from './Loader'
 import VideoPlayer from './VideoPlayer'
 import { ScrollArea } from './ui/scroll-area'
 import { Spinner } from './ui/spinner'
 import { clsx } from 'clsx'
+import Head from 'next/head'
 import { type Dispatch, type SetStateAction } from 'react'
 import { InView } from 'react-intersection-observer'
 
@@ -33,14 +33,19 @@ const WatchScreen = ({
   setSelected,
 }: EpisodesScreenProps) => {
   return (
-    <Layout title={title}>
+    <>
+      <Head>
+        <title>{title.length > 0 ? `${title} - SEAshows` : 'SEAshows'}</title>
+        <meta name='description' content={title} />
+      </Head>
+
       {isLoadingShow ? (
-        <Loader className='min-h-[calc(100dvh-6rem)]' text='Fetching show' />
+        <Loader text='Fetching show' />
       ) : episodes && episodes.length > 0 ? (
-        <div className='container mx-auto min-h-[calc(100dvh-6rem)] px-2 lg:px-4'>
+        <div className='container mx-auto px-6'>
           <h2 className='text-2xl'>{title}</h2>
           <div className='grid grid-cols-1 gap-4 xl:grid-cols-12 xl:gap-6'>
-            <div className='aspect-video max-h-[calc(720px)] max-w-[calc(1400px)] xl:col-span-10'>
+            <div className='aspect-video max-h-[calc(720px)] max-w-[calc(1280px)] xl:col-span-10'>
               {isLoadingSources ? (
                 <Loader className='h-full' text='Fetching video sources' />
               ) : sources && sources.length > 0 ? (
@@ -75,11 +80,9 @@ const WatchScreen = ({
           </div>
         </div>
       ) : (
-        <div className='flex min-h-[calc(100dvh-6rem)] flex-col items-center justify-center'>
-          Show not found
-        </div>
+        <div className='flex items-center justify-center'>Show not found</div>
       )}
-    </Layout>
+    </>
   )
 }
 

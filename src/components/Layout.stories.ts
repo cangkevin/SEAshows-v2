@@ -13,9 +13,6 @@ export default meta
 type Story = StoryObj<typeof Layout>
 
 export const Default: Story = {
-  args: {
-    title: 'Title',
-  },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)
 
