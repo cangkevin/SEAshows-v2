@@ -1,5 +1,6 @@
 import { type AppType } from 'next/app'
 
+import Layout from '~/components/Layout'
 import { ThemeProvider } from '~/components/ui/theme-provider'
 import '~/styles/globals.css'
 import { api } from '~/utils/api'
@@ -15,7 +16,9 @@ const MyApp: AppType = ({ Component, pageProps }) => {
       enableSystem
       disableTransitionOnChange
     >
-      <Component {...pageProps} />
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
     </ThemeProvider>
   )
 }

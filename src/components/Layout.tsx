@@ -6,21 +6,18 @@ import React from 'react'
 import { categories } from '~/pages'
 
 type LayoutProps = {
-  title?: string | null
   children: React.ReactNode
 }
 
-const Layout = ({ title, children }: LayoutProps) => {
+const Layout = ({ children }: LayoutProps) => {
   return (
     <>
       <Head>
-        <title>{title ? `${title} - SEAshows` : 'SEAshows'}</title>
-        <meta name='description' content='SEAshows portal' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
       <Header categories={categories} />
-      <main>{children}</main>
+      <main className='grid min-h-[calc(100dvh-6rem)]'>{children}</main>
       <Footer />
     </>
   )

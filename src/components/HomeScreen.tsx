@@ -1,4 +1,4 @@
-import Layout from './Layout'
+import Head from 'next/head'
 import Link from 'next/link'
 
 type HomeScreenProps = {
@@ -7,7 +7,12 @@ type HomeScreenProps = {
 
 const HomeScreen = ({ categories }: HomeScreenProps) => {
   return (
-    <Layout title={'Home'}>
+    <>
+      <Head>
+        <title>SEAshows</title>
+        <meta name='description' content='SEAshows home page' />
+      </Head>
+
       <nav className='flex min-h-[calc(100dvh-6rem)] flex-col justify-center text-center'>
         <ul>
           {categories.map((category) => (
@@ -19,7 +24,7 @@ const HomeScreen = ({ categories }: HomeScreenProps) => {
           ))}
         </ul>
       </nav>
-    </Layout>
+    </>
   )
 }
 
