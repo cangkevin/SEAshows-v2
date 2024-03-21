@@ -22,6 +22,7 @@ const ShowListing = ({ id, name, thumbnailUrl }: ShowListingProps) => {
           alt={name}
           fill
           onLoad={() => setLoading(false)}
+          onError={() => setLoading(false)}
         />
       </Link>
       <div className='line-clamp-2 text-center md:text-lg'>
