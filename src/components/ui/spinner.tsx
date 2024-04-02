@@ -8,8 +8,8 @@ import { cn } from '~/lib/utils'
 const spinnerVariants = cva('animate-spin', {
   variants: {
     size: {
-      default: 'h-4 w-4',
-      lg: 'h-8 w-8',
+      default: 'size-4',
+      lg: 'size-8',
     },
   },
   defaultVariants: {
