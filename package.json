@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "engines": {
-    "node": ">=18.19.0"
+    "node": ">=20.18.0"
   },
   "scripts": {
     "build": "next build",
@@ -65,7 +65,7 @@
     "@storybook/test-runner": "^0.16.0",
     "@trivago/prettier-plugin-sort-imports": "^4.1.1",
     "@types/eslint": "^8.21.3",
-    "@types/node": "^18.15.5",
+    "@types/node": "^20.16.10",
     "@types/prettier": "^2.7.2",
     "@types/react": "^18.2.57",
     "@types/react-dom": "^18.2.19",
