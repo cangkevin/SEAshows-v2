@@ -28,7 +28,7 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
-      - name: Set Up Node 18
+      - name: Set Up Node
         uses: actions/setup-node@v4
         with:
           node-version-file: '.nvmrc'
