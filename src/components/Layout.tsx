@@ -1,5 +1,6 @@
 import Footer from './Footer'
 import Header from './Header'
+import { Analytics } from '@vercel/analytics/react'
 import Head from 'next/head'
 import React from 'react'
 
@@ -17,7 +18,10 @@ const Layout = ({ children }: LayoutProps) => {
       </Head>
 
       <Header categories={categories} />
-      <main className='grid min-h-[calc(100dvh-6rem)]'>{children}</main>
+      <main className='grid min-h-[calc(100dvh-6rem)]'>
+        {children}
+        <Analytics />
+      </main>
       <Footer />
     </>
   )
