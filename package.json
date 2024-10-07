@@ -52,7 +52,7 @@
   "devDependencies": {
     "@commitlint/cli": "^17.5.1",
     "@commitlint/config-conventional": "^17.4.4",
-    "@playwright/test": "1.42.1",
+    "@playwright/test": "1.47.2",
     "@storybook/addon-essentials": "^7.6.16",
     "@storybook/addon-interactions": "^7.6.16",
     "@storybook/addon-links": "^7.6.16",
@@ -92,8 +92,8 @@
     "typescript": "^5.0.2"
   },
   "overrides": {
-    "playwright": "1.42.1",
-    "@playwright/browser-chromium": "1.42.1"
+    "playwright": "1.47.2",
+    "@playwright/browser-chromium": "1.47.2"
   },
   "ct3aMetadata": {
     "initVersion": "7.10.1"
