@@ -53,6 +53,7 @@
     "@commitlint/cli": "^17.5.1",
     "@commitlint/config-conventional": "^17.4.4",
     "@playwright/test": "1.57.0",
+    "@storybook/addon-docs": "9.1.16",
     "@storybook/addon-links": "9.1.16",
     "@storybook/addon-onboarding": "9.1.16",
     "@storybook/addon-themes": "9.1.16",
@@ -60,7 +61,7 @@
     "@storybook/test-runner": "0.22.0",
     "@trivago/prettier-plugin-sort-imports": "^4.1.1",
     "@types/eslint": "^8.21.3",
-    "@types/node": "^20.16.10",
+    "@types/node": "22.19.2",
     "@types/prettier": "^2.7.2",
     "@types/react": "^18.2.57",
     "@types/react-dom": "^18.2.19",
@@ -84,8 +85,7 @@
     "prettier-plugin-tailwindcss": "^0.2.6",
     "storybook": "9.1.16",
     "tailwindcss": "^3.3.0",
-    "typescript": "^5.0.2",
-    "@storybook/addon-docs": "9.1.16"
+    "typescript": "^5.0.2"
   },
   "overrides": {
     "playwright": "1.57.0",
