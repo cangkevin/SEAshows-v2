@@ -1,5 +1,5 @@
 import Loader from './Loader'
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/nextjs'
 
 const meta: Meta<typeof Loader> = {
   component: Loader,

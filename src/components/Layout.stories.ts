@@ -1,6 +1,6 @@
 import Layout from './Layout'
-import type { Meta, StoryObj } from '@storybook/react'
-import { expect, within } from '@storybook/test'
+import type { Meta, StoryObj } from '@storybook/nextjs'
+import { expect, within } from 'storybook/test'
 
 import { categories } from '~/pages'
 
