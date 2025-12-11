@@ -1,5 +1,5 @@
 import WatchScreen from './WatchScreen'
-import { type Meta, type StoryObj } from '@storybook/react'
+import { type Meta, type StoryObj } from '@storybook/nextjs'
 
 import { type EpisodeFeedItem } from '~/utils/types'
 

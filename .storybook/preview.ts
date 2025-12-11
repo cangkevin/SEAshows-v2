@@ -2,8 +2,8 @@
 // https://storybook.js.org/recipes/tailwindcss#2-provide-tailwind-to-stories
 import '../src/styles/globals.css'
 import { withThemeByClassName } from '@storybook/addon-themes'
-import { INITIAL_VIEWPORTS, MINIMAL_VIEWPORTS } from '@storybook/addon-viewport'
-import { Preview, ReactRenderer } from '@storybook/react'
+import { INITIAL_VIEWPORTS, MINIMAL_VIEWPORTS } from 'storybook/viewport'
+import { Preview, ReactRenderer } from '@storybook/nextjs'
 
 const preview: Preview = {
   parameters: {
@@ -14,8 +14,7 @@ const preview: Preview = {
       },
     },
     viewport: {
-      // NOTE - https://storybook.js.org/docs/essentials/viewport#use-a-detailed-set-of-devices
-      viewports: {
+      options: {
         ...INITIAL_VIEWPORTS,
         ...MINIMAL_VIEWPORTS,
       },
