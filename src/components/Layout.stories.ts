@@ -1,5 +1,5 @@
 import Layout from './Layout'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import { expect, within } from 'storybook/test'
 
 import { categories } from '~/pages'

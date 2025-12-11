@@ -3,7 +3,7 @@
 import '../src/styles/globals.css'
 import { withThemeByClassName } from '@storybook/addon-themes'
 import { INITIAL_VIEWPORTS, MINIMAL_VIEWPORTS } from 'storybook/viewport'
-import { Preview, ReactRenderer } from '@storybook/nextjs'
+import { Preview, ReactRenderer } from '@storybook/nextjs-vite'
 
 const preview: Preview = {
   parameters: {
