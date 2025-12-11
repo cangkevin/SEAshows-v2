@@ -1,5 +1,5 @@
 import { Spinner } from './spinner'
-import { type Meta, type StoryObj } from '@storybook/nextjs'
+import { type Meta, type StoryObj } from '@storybook/nextjs-vite'
 import { expect, within } from 'storybook/test'
 
 const meta: Meta<typeof Spinner> = {

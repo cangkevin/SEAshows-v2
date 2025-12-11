@@ -1,5 +1,5 @@
 import Footer from './Footer'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import { expect, within } from 'storybook/test'
 
 const meta: Meta<typeof Footer> = {
